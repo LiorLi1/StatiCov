@@ -35,7 +35,7 @@
 }
 
 .roundy {
-  border-radius: 50px;
+  border-radius: 30px;
 }
 
 .border {
@@ -43,7 +43,7 @@
 }
 
 .rounded {
-  border-radius: 0.5rem !important;
+  border-radius: 0.8rem !important;
 }
 
 .push {

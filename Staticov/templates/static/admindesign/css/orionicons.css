@@ -79,7 +79,6 @@
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
   }
 
   .o-app-layout-1::before { content: "\f300"; }

@@ -59,7 +59,7 @@
 }
 
 .dot {
-  max-width: 10px;
+  max-width: 30px;
   min-width: 10px;
   max-height: 10px;
   min-height: 10px;
@@ -3139,7 +3139,7 @@ button.bg-blue:focus {
 }
 
 .bg-green {
-  background-color: #7CF29C !important;
+  background-color: #222222 !important;
 }
 
 a.bg-green:hover, a.bg-green:focus,

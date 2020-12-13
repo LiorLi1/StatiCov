@@ -4,7 +4,5 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request,'index.html')
-def test(request):
-    return render(request,'test.html')
-def home(request):
-    return render(request,'worker/about.html')
+def AdminDash(request):
+    return render(request,'AdminDashBoard/index.html')

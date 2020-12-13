@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Dash Board</title>
+    <title>Admin Dash-Board</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -30,7 +30,7 @@
   <body>
     <!-- navbar-->
     <header class="header">
-      <nav class="navbar navbar-expand-lg px-8 py-2 bg-white shadow"><a class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a class="navbar-brand font-weight-bold text-uppercase text-base text-blue">ברוכים הבאים</a>
+      <nav class="navbar navbar-expand-lg px-8 py-2 bg-white shadow"><a class="sidebar-toggler text-gray-400 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a class="navbar-brand font-weight-bold text-uppercase text-base text-blue">ברוכים הבאים</a>
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
           <li class="nav-item">
             <form id="searchForm" class="ml-auto d-none d-lg-block">
@@ -43,36 +43,25 @@
           <li class="nav-item dropdown mr-3"><a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1"><i class="fa fa-bell"></i><span class="notification-icon"></span></a>
             <div aria-labelledby="notifications" class="dropdown-menu"><a href="#" class="dropdown-item">
                 <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
-                  <div class="text ml-2">
-                    <p class="mb-0">You have 2 followers</p>
-                  </div>
                 </div></a><a href="#" class="dropdown-item"> 
                 <div class="d-flex align-items-center">
                   <div class="icon icon-sm bg-green text-white"><i class="fas fa-envelope"></i></div>
                   <div class="text ml-2">
-                    <p class="mb-0">You have 6 new messages</p>
+                    <p class="mb-0">הודעות חדשות</p>
                   </div>
                 </div></a><a href="#" class="dropdown-item">
                 <div class="d-flex align-items-center">
                   <div class="icon icon-sm bg-blue text-white"><i class="fas fa-upload"></i></div>
                   <div class="text ml-2">
-                    <p class="mb-0">Server rebooted</p>
+                    <p class="mb-0">הקבצים שלי</p>
                   </div>
                 </div></a><a href="#" class="dropdown-item">
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
-                  <div class="text ml-2">
-                    <p class="mb-0">You have 2 followers</p>
-                  </div>
-                </div></a>
-              <div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">View all notifications</small></a>
+              <div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">ראה את כל ההתראות</small></a>
             </div>
           </li>
           <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="{%static 'admindesign/img/AdminLogo.jpg'%}" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
-            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">Mark Stephen</strong><small>Web Developer</small></a>
-              <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
-              <div class="dropdown-divider"></div><a href="login.html" class="dropdown-item">Logout</a>
+            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">שלום User</strong><small>ברוך שובך</small></a>
+              <div class="dropdown-divider"></div><a href="login.html" class="dropdown-item">יציאה</a>
             </div>
           </li>
         </ul>
@@ -89,7 +78,7 @@
         </ul>
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold big headings-font-family">עזרה</div>
         <ul class="sidebar-menu list-unstyled">
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>סרטון הדרכה</span></a></li>
+          <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>סרטון הדרכה</span></a></li>
               <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>יצירת קשר</span></a></li>
         </ul>
       </div>
@@ -97,7 +86,7 @@
         <div class="container-fluid px-xl-5">
           <section class="py-5">
             <div class="col">
-              <div class="col-xl-6 col-lg-6 mb-4 mb-xl-4" style="vertical-align:center;margin:30px 110px">
+              <div class="col-xl-6 col-lg-6 mb-4 mb-xl-4" style="vertical-align:center;margin:30px 180px">
                 <div class="bg-white shadow roundy p-4 h-100 d-flex align-items-center justify-content-between">
                   <div class="flex-grow-5 d-flex align-items-center">
                     <div class="dot mr-3 bg-green"></div>
@@ -108,12 +97,12 @@
                   <div class="icon text-white bg-green"><i class="far fa-clipboard"></i></div>
                 </div>
               </div>
-              <div class="col-xl-6 col-lg-6 mb-4 mb-xl-0" style="vertical-align:center;margin:30px 110px">
+              <div class="col-xl-6 col-lg-6 mb-4 mb-xl-0" style="vertical-align:center;margin:30px 180px">
                 <div class="bg-white shadow roundy p-4 h-100 d-flex align-items-center justify-content-between">
                   <div class="flex-grow-1 d-flex align-items-center">
                     <div class="dot mr-3 bg-red"></div>
                     <div class="text">
-                      <h6 class="mb-0">הודעות מתפרצות</h6><span class="text-gray">הוספה\הסרה</span>
+                      <h6 class="mb-0">הודעות מתפרצות</h6><span class="text-gray">הוספה ו\או הסרה</span>
                     </div>
                   </div>
                   <div class="icon text-white bg-red"><i class="fas fa-receipt"></i></div>
@@ -122,7 +111,7 @@
             </div>
           </section>
         </div>
-        <img src="{%static 'admindesign/img/logostaticov.png' %}" width="95" height="95" style="vertical-align:center;margin:130px 400px">
+        <img src="{%static 'admindesign/img/logostaticov.png' %}" width="95" height="95" style="vertical-align:center;margin:150px 480px">
         <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
           <div class="container-fluid">
             <div class="col">

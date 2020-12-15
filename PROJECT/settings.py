@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'PROJECT',
     'Staticov.apps.StaticovConfig',
     'django.contrib.admin',
     'django.contrib.auth',

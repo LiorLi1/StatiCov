@@ -8,5 +8,5 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('AdminDash', views.AdminDash, name='AdminDash'),
     path('contact', views.contact, name='contact'),
-    path('MainDash', views.MainDash, name='MainDash')
+    path('MainDashBoard', views.MainDashBoard, name='MainDashBoard')
 ]

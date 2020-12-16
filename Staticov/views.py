@@ -8,7 +8,7 @@ def AdminDash(request):
     return render(request,'AdminDashBoard/index.html')
 def contact(request):
     return render(request,'AdminDashBoard/contact.html')
-def MainDash(request):
-    return render(request,'MainDashBoard/MainDashBoardindex.html')
+def MainDashBoard(request):
+    return render(request,'MainDashBoard/index.html')
 
 

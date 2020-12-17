@@ -25,11 +25,12 @@ def Insertrecord(request):
      saverecord.religion=request.POST.get('Religion')
      saverecord.age=request.POST.get('age')
      saverecord.place=request.POST.get('Place')
+     saverecord.email=request.POST.get('email')
      saverecord.save()
      messages.success(request,'Record Saved Successfully...!')
-     return render(request,'about.html')
+     return home(request)
  else:
-    return render(request,'about.html')
+    return home(request)
 
 
 

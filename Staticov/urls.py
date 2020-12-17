@@ -8,5 +8,5 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('test', views.test, name='page'),
     path('home', views.home, name='about'),
-    path('',views.Insertrecord)
+    path('add_civilian',views.Insertrecord)
 ]

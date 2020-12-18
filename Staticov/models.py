@@ -13,3 +13,15 @@ class Civilianform(models.Model):
     class Meta:
         managed = False
         db_table = 'civilianform'
+
+class contactmainpage(models.Model):
+    name = models.TextField(db_column='Name')  # Field name made lowercase.
+    email=models.TextField(db_column='email') # Field name made lowercase..
+    telephone = models.CharField(db_column='telephone',max_length=11)
+    symptomes = models.CharField(db_column='symptomes',max_length=1)
+    age = models.IntegerField(db_column='age')
+    
+
+    class Meta:
+        managed = False
+        db_table = 'contactmainpage'

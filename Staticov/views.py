@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from Staticov.models import Civilianform
 from Staticov.models import contactmainpage
+from Staticov.models import workerlogin
 from django.contrib import messages
 #from .forms import InsertForm
 # Create your views here.
@@ -12,6 +13,19 @@ def home(request):
     return render(request,'worker/about.html')
 def inscription(request):
     return render(request,'inscriptionform.html')
+def registration(request):
+    return render(request,'registrationform.html')
+
+def worker_login(request):
+ if request.method=='POST':
+     saverecord=workerlogin()
+     saverecord.login=request.POST.get('login')
+     saverecord.password=request.POST.get('password')
+     saverecord.save()
+     messages.success(request,'Record Saved Successfully...!')
+     return inscription(request)
+ else:
+     return inscription(request)
 
 def Homeinsert(request):
  if request.method=='POST':

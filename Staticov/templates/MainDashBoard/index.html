@@ -13,7 +13,7 @@
   <link href="{%static 'dashboard_design/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{%static 'dashboard_design/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{%static 'dashboard_design/css/ruang-admin.min.css' %}" rel="stylesheet">
-  <script src="dashboard_design/js/demo/chart-area-demo.js" type="text/javascript"></script>
+  <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}" type="text/javascript"></script>
 </head>
 
 <body id="page-top">
@@ -172,7 +172,7 @@
                 <div class="card-body">
                   <div class="chart-area">
                     <canvas id="myAreaChart" width="600" height="400"></canvas>
-                     <script src="dashboard_design/js/demo/chart-area-demo.js">
+                     <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}">
                      </script>
                   </div>
                 </div>
@@ -313,10 +313,10 @@
               </div>
             </div>
             <!-- Message From Customer-->
-            <div class="col-xl-4 col-lg-5 ">
+            <div class="col-xl-4 col-lg-5">
               <div class="card">
                 <div class="card-header py-4 bg-primary d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-light">Message From Customer</h6>
+                  <h6 class="m-0 font-weight-bold text-light">הודעות אחרונות</h6>
                 </div>
                 <div>
                   <div class="customer-message align-items-center">
@@ -349,72 +349,25 @@
                     </a>
                   </div>
                   <div class="card-footer text-center">
-                    <a class="m-0 small text-primary card-link" href="#">View More <i
+                    <a class="m-0 small text-primary card-link" href="#">לכל ההודעות <i
                         class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!--Row-->
-
-          <div class="row">
-            <div class="col-lg-12 text-center">
-              <p>Do you like this template ? you can download from <a href="https://github.com/indrijunanda/RuangAdmin"
-                  class="btn btn-primary btn-sm" target="_blank"><i class="fab fa-fw fa-github"></i>&nbsp;GitHub</a></p>
-            </div>
-          </div>
-
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!---Container Fluid-->
-      </div>
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
-              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
-            </span>
-          </div>
-        </div>
-      </footer>
-      <!-- Footer -->
-    </div>
-  </div>
 
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="js/ruang-admin.min.js"></script>
-  <script src="vendor/chart.js/Chart.min.js"></script>
-  <script src="js/demo/chart-area-demo.js"></script>  
+  <script src="{%static 'dashboard_design/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{%static 'dashboard_design/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{%static 'dashboard_design/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{%static 'dashboard_design/js/ruang-admin.min.js' %}"></script>
+  <script src="{%static 'dashboard_design/vendor/chart.js/Chart.min.js' %}"></script>
+  <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}"></script>  
 </body>
 
 </html>

@@ -1,1 +1,42 @@
-<h1>FUCK</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Django CRUD Operations</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+</head>
+<body>
+<div class="container">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+		<th>ID</th>
+		<th>Telephone</th>
+		<th>Date</th>
+        <th>Religion</th>
+        <th>Age</th>
+        <th>Place</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+	{% for civ in civilians %}  
+      <tr>
+        <td>{{civ.name}}</td>
+        <td>{{stud.ID}}</td>
+		<td>{{stud.telephone}}</td>
+		<td>{{stud.date}}</td>
+        <td>{{stud.religion}}</td>
+        <td>{{stud.age}}</td>
+        <td>{{stud.place}}</td>
+        <td>{{stud.email}}</td>
+      </tr>
+	{% endfor %} 
+	</tbody>
+</table>	
+</div>
+</body>
+</html>

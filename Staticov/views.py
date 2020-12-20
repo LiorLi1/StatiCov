@@ -1,14 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from Staticov.models import Civilianform
 from django.contrib import messages
-#from .forms import InsertForm
+import pandas as pd
+
+
+
+
 # Create your views here.
 
 def index(request):
     return render(request,'index.html')
 def test(request):
-    return render(request,'test.html')
+    
+    return render(request,'test.html',{'df':data})
 def home(request):
     return render(request,'worker/about.html')
 
@@ -31,6 +36,9 @@ def Insertrecord(request):
      return home(request)
  else:
     return home(request)
+
+
+
 
 
 

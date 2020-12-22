@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{% static 'admindesign/css/style.default.css' %}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{% static 'admindesign/css/custom.css' %}">
-    
+
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.png?3">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
@@ -34,7 +34,7 @@
   <body>
     <!-- navbar-->
     <header class="header">
-      <nav class="navbar navbar-expand-lg px-8 py-2 bg-white shadow"><a class="sidebar-toggler text-gray-400 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a class="navbar-brand font-weight-bold text-uppercase text-base text-blue">ברוכים הבאים</a>
+      <nav class="navbar navbar-expand-lg px-8 py-2 bg-white shadow"><a class="sidebar-toggler text-gray-400 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a class="navbar-brand font-weight-bold text-uppercase text-xl text-blue">ברוכים הבאים</a>
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
           <li class="nav-item">
             <form id="searchForm" class="ml-auto d-none d-lg-block">
@@ -73,10 +73,11 @@
     </header>
     <div class="d-flex align-items-stretch">
       <div id="sidebar" class="sidebar py-3">
+        <img src="{%static 'admindesign/img/logostaticov.png' %}" width="60" height="65" style="position: relative;margin:20px 100px">
         <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold big headings-font-family text-center">תפריט</style></div>
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="index" class="sidebar-link text-muted active"><i class="o-home-1 mr-3 text-gray"></i><span>דף הבית</span></a></li>
-              <li class="sidebar-list-item"><a href="charts.html" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>סטטיסטיקות</span></a></li>
+              <li class="sidebar-list-item"><a href="MainDashBoard" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>סטטיסטיקות</span></a></li>
               <li class="sidebar-list-item"><a href="tables.html" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>בסיס הנתונים</span></a></li>
               <li class="sidebar-list-item"><a href="index" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>יציאה</span></a></li>
         </ul>
@@ -86,38 +87,25 @@
               <li class="sidebar-list-item"><a href="contact" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>יצירת קשר</span></a></li>
         </ul>
       </div>
-      <div class="page-holder w-100 d-flex flex-wrap">
-        <div class="container-fluid px-xl-5">
-          <section class="py-5">
-            <div class="col">
-              <div class="col-xl-6 col-lg-6 mb-4 mb-xl-4" style="vertical-align:center;margin:30px 180px; text-align:right">
-                <div class="bg-white shadow roundy p-4 h-100 d-flex align-items-center justify-content-between">
-                  <div class="flex-grow-5 d-flex align-items-center">
-                    <div class="dot mr-3 bg-green"></div>
-                    <div class="text">
-                      <h6 class="mb-0">רשימת עובדים</h6>
-                    </div>
-                  </div>
-                  <div class="icon text-white bg-green"><i class="far fa-clipboard"></i></div>
-                </div>
-              </div>
-              <div class="col-xl-6 col-lg-6 mb-4 mb-xl-0" style="vertical-align:center;margin:30px 180px">
-                <div class="bg-white shadow roundy p-4 h-100 d-flex align-items-center justify-content-between">
-                  <div class="flex-grow-1 d-flex align-items-center">
-                    <div class="dot mr-3 bg-red"></div>
-                    <div class="text">
-                      <h6 class="mb-0">הודעות מתפרצות</h6><span class="text-gray">הוספה ו\או הסרה</span>
-                    </div>
-                  </div>
-                  <div class="icon text-white bg-red"><i class="fas fa-receipt"></i></div>
-                </div>
-              </div>
+      <div class="page-holder w-100 d-flex flex-wrap" style="vertical-align:center;margin:30px 255px">
+        <div class="row">
+          <div class="col-lg-10" style="vertical-align:center;margin:30px 110px; text-align:center;">
+            <div id="content-formatting" class="card mb-4">
+              <div class="card-header"><b>אפשרויות</b></div>
+              <div class="card-body text-xl">
+                <a href="#" target="_blank">יצירת הודעות מתפרצות</a><br><br>
+                <a href="#">לוח הזמנים שלי</a><br><br>
+                <a href="#">רשימת חולים חדשים</a><br>
+                <a href="#"></a><br>
             </div>
-          </section>
+          </div>
         </div>
-        <img src="{%static 'admindesign/img/logostaticov.png' %}" width="95" height="95" style="vertical-align:center;margin:150px 480px">
-        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
-          <div class="container-fluid">
+            <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
             <div class="col">
               <div class="col-md-6 text-center text-md-left text-primary">
               </div>

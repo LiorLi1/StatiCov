@@ -13,7 +13,9 @@
   <link href="{%static 'dashboard_design/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{%static 'dashboard_design/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{%static 'dashboard_design/css/ruang-admin.min.css' %}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}" type="text/javascript"></script>
+  <script src="{%static 'dashboard_design/js/demo/chart-pie-demo.js' %}" type="text/javascript"></script>
 </head>
 
 <body id="page-top">
@@ -86,7 +88,8 @@
                 <div class="card-body">
                   <div class="row align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">סה"כ נדבקים</div>
+                      <img src="{%static 'dashboard_design/img/israelflag.png' %}" width="25" height="25">
+                      <div class="text-xl font-weight-bold text-uppercase mb-1">סה"כ נדבקים</div>
                       <div class="h5 mb-0 font-weight-bold text-danger">364,320</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
                         <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
@@ -103,7 +106,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">אתמול</div>
+                      <img src="{%static 'dashboard_design/img/israelflag.png' %}" width="25" height="25">
+                      <div class="text-xl font-weight-bold text-uppercase mb-1">אתמול</div>
                       <div class="h5 mb-0 font-weight-bold text-danger">2,880</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
                         <span class="text-success mr-2"><!--i class="fas fa-arrow-down"></i></span-->
@@ -120,7 +124,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">חולים קשה</div>
+                      <img src="{%static 'dashboard_design/img/israelflag.png' %}" width="25" height="25">
+                      <div class="text-xl font-weight-bold text-uppercase mb-1">חולים קשה</div>
                       <div class="h5 mb-0 font-weight-bold text-danger">383</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
                         <span class="text-danger mr-2"><i class="fas fa-arrow-up"></i></span>
@@ -137,7 +142,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">מתים</div>
+                      <img src="{%static 'dashboard_design/img/israelflag.png' %}" width="25" height="25">
+                      <div class="text-xl font-weight-bold text-uppercase mb-1">מתים</div>
                       <div class="h5 mb-0 font-weight-bold text-danger">3,031</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
                         <span class="text-danger mr-2"><i class="fas fa-arrow-up"></i></span>
@@ -155,17 +161,8 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">נתונים אחרונים- חודש דצמבר 12</h6>
                   <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                       aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                   </div>
                 </div>
@@ -178,7 +175,103 @@
                 </div>
               </div>
             </div>
-            <!-- Pie Chart -->
+            <!-- Pie Chart-->
+            <div class="col-xl-4 col-lg-5">
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between align-items-center">
+                  <div class="dropdown no-arrow text-danger">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                      aria-labelledby="dropdownMenuLink">
+                      <span class="badge badge-success">החלימו מקורונה</span></td>
+                      <br>
+                      <span class="badge badge-danger">חולים בקורונה</span></td>
+                      <br>
+                      <span class="badge badge-info">בדיקות קורונה</span></td>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="chart-pie">
+                    <canvas id="myPieChart" width="300" height="250"></canvas>
+                     <script src="{%static 'dashboard_design/js/demo/chart-pie-demo.js' %}">
+                     </script>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- message Example -->
+            <div class="col-xl-8 col-lg-7 mb-4 text-center">
+              <div class="card">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-center">
+                  <h6 class="m-0 font-weight-bold text-primary">מבזקים ועדכונים</h6>
+                  <a class="m-0 float-right btn btn-danger btn-sm" href="#">ראה\י עוד... <i
+                      class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>כותרת</th>
+                        <th></th>
+                        <th>תאריך</th>
+                        <th></th>
+                        <th></th>
+                        <th>פרטים</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>קורונה? משבר הוא גם הזדמנות לחדשנות</td>
+                        <td></td>
+                        <td>20.12.2020</td>
+                        <td></td>
+                        <td><span class="badge badge-success">חדש</span></td>
+                        <td><a href="" class="btn btn-sm btn-primary">קישור</a></td>
+                      </tr>
+                      <tr>
+                        <td>כל העיניים לבריטניה: אירופה מנסה לעצור את המוטציה</td>
+                        <td></td>
+                        <td>20.12.2020</td>
+                        <td></td>
+                        <td><span class="badge badge-success">חדש</span></td>
+                        <td><a href="https://www.ynet.co.il/news/article/BJqfzTnnP#autoplay" class="btn btn-sm btn-primary">קישור</a></td>
+                      </tr>
+                      <tr>
+                        <td>פייזר או מודרנה: השווינו בין החיסונים</td>
+                        <td></td>
+                        <td>20.12.2020</td>
+                        <td></td>
+                        <td><span class="badge badge-success">חדש</span></td>
+                        <td><a href="https://www.ynet.co.il/health/article/S17n00Di2w#autoplay" class="btn btn-sm btn-primary">קישור</a></td>
+                      </tr>
+                      <tr>
+                        <td>ארה"ב: FDA אישר סופית את החיסון של מודרנה</td>
+                        <td></td>
+                        <td>19.12.2020</td>
+                        <td></td>
+                        <td><span class="badge badge-danger">ישן יותר</span></td>
+                        <td><a href="https://www.ynet.co.il/health/article/B1N00NiuhP#autoplay" class="btn btn-sm btn-primary">קישור</a></td>
+                      </tr>
+                      <tr>
+                        <td>מסתמן: קופות החולים יקימו מתחמי חיסון משותפים בפריפריה</td>
+                        <td></td>
+                        <td>18.12.2020</td>
+                        <td></td>
+                        <td><span class="badge badge-danger">ישן יותר</span></td>
+                        <td><a href="https://www.ynet.co.il/news/article/HJDh11115hv" class="btn btn-sm btn-primary">קישור</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-footer"></div>
+              </div>
+            </div>
+            <!-- Line Chart graph-->
             <div class="col-xl-4 col-lg-5 ">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -201,25 +294,25 @@
                 <div class="card-body">
                   <div class="mb-3">
                     <div class="small text-gray-500">ירושלים
-                      <div class="small float-right"><b>600 of 800 </b></div>
+                      <div class="small float-right"><b>4,492 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="80"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="small text-gray-500">תל אביב - יפו
+                      <div class="small float-right"><b>786 </b></div>
+                    </div>
+                    <div class="progress" style="height: 12px;">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 70%" aria-valuenow="70"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="mb-3">
                     <div class="small text-gray-500">חיפה
-                      <div class="small float-right"><b>500 of 800 </b></div>
-                    </div>
-                    <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="70"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <div class="small text-gray-500">בני ברק
-                      <div class="small float-right"><b>455 of 800 </b></div>
+                      <div class="small float-right"><b>730 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
                       <div class="progress-bar bg-danger" role="progressbar" style="width: 55%" aria-valuenow="55"
@@ -227,20 +320,20 @@
                     </div>
                   </div>
                   <div class="mb-3">
-                    <div class="small text-gray-500">אופקים
-                      <div class="small float-right"><b>400 of 800 </b></div>
+                    <div class="small text-gray-500">פתח תקווה
+                      <div class="small float-right"><b>578 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="mb-3">
-                    <div class="small text-gray-500">אזור
-                      <div class="small float-right"><b>200 of 800 </b></div>
+                    <div class="small text-gray-500">בני ברק
+                      <div class="small float-right"><b>547 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30"
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="30"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
@@ -251,111 +344,18 @@
                 </div>
               </div>
             </div>
-            <!-- Invoice Example -->
-            <div class="col-xl-8 col-lg-7 mb-4">
-              <div class="card">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Invoice</h6>
-                  <a class="m-0 float-right btn btn-danger btn-sm" href="#">View More <i
-                      class="fas fa-chevron-right"></i></a>
-                </div>
-                <div class="table-responsive">
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Item</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="#">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA5324</a></td>
-                        <td>Jaenab Bajigur</td>
-                        <td>Gundam 90' Edition</td>
-                        <td><span class="badge badge-warning">Shipping</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA8568</a></td>
-                        <td>Rivat Mahesa</td>
-                        <td>Oblong T-Shirt</td>
-                        <td><span class="badge badge-danger">Pending</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1453</a></td>
-                        <td>Indri Junanda</td>
-                        <td>Hat Rounded</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1998</a></td>
-                        <td>Udin Cilok</td>
-                        <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="card-footer"></div>
-              </div>
-            </div>
-            <!-- Message From Customer-->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card">
-                <div class="card-header py-4 bg-primary d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-light">הודעות אחרונות</h6>
-                </div>
-                <div>
-                  <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">Hi there! I am wondering if you can help me with a
-                        problem I've been having.</div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Udin Cilok · 58m</div>
-                    </a>
-                  </div>
-                  <div class="customer-message align-items-center">
-                    <a href="#">
-                      <div class="text-truncate message-title">But I must explain to you how all this mistaken idea
-                      </div>
-                      <div class="small text-gray-500 message-time">Nana Haminah · 58m</div>
-                    </a>
-                  </div>
-                  <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Jajang Cincau · 25m</div>
-                    </a>
-                  </div>
-                  <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">At vero eos et accusamus et iusto odio dignissimos
-                        ducimus qui blanditiis
-                      </div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Udin Wayang · 54m</div>
-                    </a>
-                  </div>
-                  <div class="card-footer text-center">
-                    <a class="m-0 small text-primary card-link" href="#">לכל ההודעות <i
-                        class="fas fa-chevron-right"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+<!--Section: Contact v.2-->
+<section class="section">
+  <!--Section heading-->
+  <div class="card" style="vertical-align:center;margin:30px 110px; text-align:center">
+    <div class="card-body">
+      <!--Google map-->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d579070.2277487356!2d35.467928790363594!3d31.847857867160222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1siw!2sus!4v1608494102280!5m2!1siw!2sus" width="950" height="380" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Section: Contact v.2-->
 
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
@@ -368,6 +368,7 @@
   <script src="{%static 'dashboard_design/js/ruang-admin.min.js' %}"></script>
   <script src="{%static 'dashboard_design/vendor/chart.js/Chart.min.js' %}"></script>
   <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}"></script>  
+  <script src="{%static 'dashboard_design/js/demo/chart-pie-demo.js' %}"></script>  
 </body>
 
 </html>

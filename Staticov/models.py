@@ -14,13 +14,6 @@ class Civilianform(models.Model):
         managed = False
         db_table = 'civilianform'
 
-class workerlogin(models.Model):
-    login = models.TextField(db_column='login')  # Field name made lowercase.
-    password=models.CharField(db_column='password', max_length=9) # Field name made lowercase..
-
-    class Meta:
-        managed = False
-        db_table = 'worker-login'
 
 class contactmainpage(models.Model):
     name = models.TextField(db_column='Name')  # Field name made lowercase.
@@ -33,3 +26,14 @@ class contactmainpage(models.Model):
     class Meta:
         managed = False
         db_table = 'contactmainpage'
+
+class worker_register(models.Model):
+    ID = models.IntegerField(db_column='ID',primary_key=True)  # Field name made lowercase.
+    userid = models.CharField(db_column='userid', max_length=9)  # Field name made lowercase.
+    name= models.TextField(db_column='name')
+    password = models.CharField(db_column='password',max_length=10)
+
+    class Meta:
+        managed = True
+        db_table = 'worker-register'
+

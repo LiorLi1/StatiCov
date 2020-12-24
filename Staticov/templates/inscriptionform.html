@@ -10,17 +10,21 @@
     </div>
 
     <!-- Login Form -->
-    <form action="/Staticov/worker_login" method="POST" id="login-form" class="login-form" autocomplete="off" role="main"></form>
+    <form action="/Staticov/workerlogin" method="POST" id="login-form" class="login-form" autocomplete="off" role="main">
       {% csrf_token %}
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+      <label class="form-label" for="login"></label>
+      <input type="text" id="login" name="login" class="fadeIn second"/>
+
+      <label class="form-label" for="password"></label>
+      <input type="text" id="password" name="password" class="fadeIn third"/>
+
       <input type="submit" class="fadeIn fourth" value="Log In">
       {% if messages %}
-  {% for message in messages%}
-    <h2 style="color:green;">{{message}}</h2>
-  {% endfor %}
-  {% endif %}
-    </form>
+      {% for message in messages%}
+        <h2 style="color:green;">{{message}}</h2>
+      {% endfor %}
+      {% endif %}
+      </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">

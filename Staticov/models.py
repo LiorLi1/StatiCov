@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
 class Civilianform(models.Model):
     name = models.TextField(db_column='Name')  # Field name made lowercase.
     ID = models.CharField(db_column='ID', max_length=9)  # Field name made lowercase.
@@ -15,17 +17,15 @@ class Civilianform(models.Model):
         db_table = 'civilianform'
 
 
-class contactmainpage(models.Model):
-    name = models.TextField(db_column='Name')  # Field name made lowercase.
-    email = models.TextField(db_column='email') # Field name made lowercase..
+class index_form(models.Model):
+    ID = models.IntegerField(db_column='ID',primary_key=True)  # Field name made lowercase.
+    name = models.TextField(db_column='name')  # Field name made lowercase.
+    taz = models.CharField(db_column='taz',max_length=9) # Field name made lowercase..
     telephone = models.CharField(db_column='telephone',max_length=11)
-    symptomes = models.CharField(db_column='symptomes',max_length=1)
-    age = models.IntegerField(db_column='age')
-    
-
+    symptomes = models.TextField(db_column='symptomes')
     class Meta:
         managed = False
-        db_table = 'contactmainpage'
+        db_table = 'indexform'
 
 class worker_register(models.Model):
     ID = models.IntegerField(db_column='ID',primary_key=True)  # Field name made lowercase.
@@ -37,3 +37,11 @@ class worker_register(models.Model):
         managed = True
         db_table = 'worker-register'
 
+class login_form(models.Model):
+    ID = models.IntegerField(db_column='ID',primary_key=True)  # Field name made lowercase.
+    userid = models.CharField(db_column='userid', max_length=9)  # Field name made lowercase.
+    password = models.CharField(db_column='password',max_length=10)
+
+    class Meta:
+        managed = False
+        db_table = 'worker-register'

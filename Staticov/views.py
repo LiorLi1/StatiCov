@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from Staticov.models import Civilianform
-from Staticov.models import contactmainpage
+from Staticov.models import index_form
 from Staticov.models import worker_register
+from Staticov.models import login_form
 from django.contrib import messages
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+
 
 #from .forms import InsertForm
 # Create your views here.
@@ -11,7 +15,7 @@ from django.contrib import messages
 def index(request):
     return render(request,'index.html')
 def home(request):
-    return render(request,'worker/about.html')
+    return render(request,'test.html')
 def inscription(request):
     return render(request,'inscriptionform.html')
 def registrations(request):
@@ -29,17 +33,26 @@ def workerinsert(request):
  else:
      return registrations(request)
 
-def Homeinsert(request):
+def loginform(request):
+    if request.method=='GET':
+        data=login_form.objets.all().values
+        form=login_form(data=request.POST)
+        if form.is_valid():
+            return index(request)
+    else :
+        return registrations(request)
+    
+
+def indexcontact(request):
  if request.method=='POST':
-     saverecord=contactmainpage()
-     saverecord.name=request.POST.get('Name')
-     saverecord.email=request.POST.get('email')
+     saverecord=index_form()
+     saverecord.name=request.POST.get('name')
+     saverecord.taz=request.POST.get('taz')
      saverecord.telephone=request.POST.get('telephone')
-     saverecord.religion=request.POST.get('symptomes')
-     saverecord.age=request.POST.get('age')
+     saverecord.symptomes=request.POST.get('symptomes')
      saverecord.save()
      messages.success(request,'Record Saved Successfully...!')
-     return index(request)
+     return registrations(request)
  else:
      return index(request)
 

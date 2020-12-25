@@ -10,6 +10,5 @@ urlpatterns = [
     path('home', views.home, name='about'),
     path('registration',views.workerinsert),
     path('indexform',views.indexcontact),
-    path('login',views.loginform),
-
+    path('get_data_test', views.get_data_test),
    ]

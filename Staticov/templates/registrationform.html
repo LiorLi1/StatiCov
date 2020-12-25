@@ -11,21 +11,17 @@
         Login
         <span class="underline"></span>
       </button>
-          <form action="/Staticov/login" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
+          <form action="registration" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
             {% csrf_token %}
             <fieldset>
           <legend>הכנס את ת"ז וסמסמא שלך למערכת</legend>
           <div class="input-block">
             <label for="userid">ת"ז</label>
             <input type="text" id="userid" minlength="9"  name="userid" class="form-control required">
-		  </div>
-		  <div class="input-block">
-            <label for="name">שם</label>
-            <input type="text" id="name" name="name" class="form-control required">
           </div>
           <div class="input-block">
             <label for="password">סיסמא</label>
-            <input type="text" id="password"  name="userid" class="form-control required">
+            <input type="text" id="password" minlength="9" name="userid" class="form-control required">
           </div>
         </fieldset>
         <button type="submit" class="btn-login">כנס</button>
@@ -41,7 +37,7 @@
         הרשמה
         <span class="underline"></span>
       </button>
-      <form action="/Staticov/registration" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
+      <form action="index" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
         <fieldset>
           {% csrf_token %}
           <legend>אינה הכניס את ת"ז שם וסמסמא כדאי להרשם</legend>

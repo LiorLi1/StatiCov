@@ -1,13 +1,19 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponse
 from Staticov.models import Civilianform
 from Staticov.models import index_form
 from Staticov.models import worker_register
-from Staticov.models import login_form
 from django.contrib import messages
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+import mysql.connector
 
+db_connection = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  database="civilian"
+)
+cursor = db_connection.cursor()
+print(db_connection)
 
 #from .forms import InsertForm
 # Create your views here.
@@ -15,7 +21,7 @@ from django.contrib.auth.forms import AuthenticationForm
 def index(request):
     return render(request,'index.html')
 def home(request):
-    return render(request,'test.html')
+    return render(request,'worker/about.html')
 def inscription(request):
     return render(request,'inscriptionform.html')
 def registrations(request):
@@ -29,19 +35,12 @@ def workerinsert(request):
      saverecord.password=request.POST.get('password')
      saverecord.save()
      messages.success(request,'Record Saved Successfully...!')
+     raw_password = saverecord.password
+     user = authenticate(username=saverecord.userid, password= raw_password)
+     login(request, user)
      return index(request)
  else:
      return registrations(request)
-
-def loginform(request):
-    if request.method=='GET':
-        data=login_form.objets.all().values
-        form=login_form(data=request.POST)
-        if form.is_valid():
-            return index(request)
-    else :
-        return registrations(request)
-    
 
 def indexcontact(request):
  if request.method=='POST':
@@ -52,7 +51,7 @@ def indexcontact(request):
      saverecord.symptomes=request.POST.get('symptomes')
      saverecord.save()
      messages.success(request,'Record Saved Successfully...!')
-     return registrations(request)
+     return index(request)
  else:
      return index(request)
 
@@ -75,6 +74,22 @@ def Insertrecord(request):
     return home(request)
 
 
+def get_data_test(request):
+    result = []
+    cursor.execute("SELECT * FROM civilianform")
+    data = cursor.fetchall()
+    for item in data:
+        print(item)
+        name, user_id, date, phone, age, place = item
+        result.append({
+            'name': name,
+            'user_id': user_id,
+            'date': str(date),
+            'phone': phone,
+            'age': age,
+            'place': place
+        })
+    return HttpResponse(json.dumps(result), content_type="application/json")
 
 
 

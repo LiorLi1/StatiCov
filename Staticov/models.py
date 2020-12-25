@@ -37,11 +37,8 @@ class worker_register(models.Model):
         managed = True
         db_table = 'worker-register'
 
-class login_form(models.Model):
-    ID = models.IntegerField(db_column='ID',primary_key=True)  # Field name made lowercase.
-    userid = models.CharField(db_column='userid', max_length=9)  # Field name made lowercase.
-    password = models.CharField(db_column='password',max_length=10)
-
-    class Meta:
-        managed = False
-        db_table = 'worker-register'
+@receiver(post_save,sender=User)
+def update_user_profile(sender,instance,created, **kwargs):
+        if created:
+           worker_register.objects.create(user=instance)
+        instance.profile.save() 

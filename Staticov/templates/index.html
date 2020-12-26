@@ -539,22 +539,23 @@
                             <div class="col-lg-7">
                                 <div class="contact-form contact-form-boxed bg-white">
                                     <h3 class="contact-form-title">חולה חדש נע להזין פרטים מחזור אלייך</h3>
-                                    <form class="nk-form-submit" action="form/contact.php" method="post">
+                                    <form class="nk-form-submit" action="/Staticov/indexform" method="POST" id="login-form" autocomplete="off" role="main">
+                                        {% csrf_token %}
                                         <div class="form-results"></div>
                                         <div class="row g-s">
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <input placeholder="שם" name="contact-name" type="text" class="form-control required">
+                                                    <input type="text" id="name" name="name" class="form-control required">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <input placeholder="אימייל" name="contact-email" type="email" class="form-control email required">
+                                                    <input type="text" class="text" name="telephone" placeholder="telephone" tabindex="1" required class="form-control email required">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <input placeholder="מספר פלפון" name="contact-phone" type="text" class="form-control required">
+                                                    <input type="text" id="taz" name="taz" class="form-control required">
                                                 </div>
                                             </div>
                                             </div>
@@ -562,26 +563,11 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="contact-symptom">You have any symptoms?</label>
                                                     <div class="form-control-select">
-                                                        <select id="contact-symptom" name="contact-symptom" class="form-control">
+                                                        <select id="symptomes" name="symptomes" class="form-control">
                                                             <option selected>יש לך סימנים ?</option>
-                                                            <option>כן כמה</option>
-                                                            <option>כן, אחד</option>
                                                             <option>לא</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-group">
-                                                    <label class="form-label" for="contact-age">גיל</label>
-                                                    <div class="form-control-select">
-                                                        <select id="contact-age" name="contact-age" class="form-control">
-                                                            <option selected>30-39 </option>
-                                                            <option>68+ </option>
-                                                            <option>56-68 </option>
-                                                            <option>40-55 </option>
-                                                            <option>20-29 </option>
-                                                            <option>00-19 </option>
+                                                            <option>אחד</option>
+                                                            <option>יותר משתיים</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -593,6 +579,11 @@
                                             <div class="col-sm-8 align-self-center text-sm-right">
                                                 <div class="form-text">אתה מסכים למדיניות הפרטיות שלנו בהגשת הטופס.</div>
                                             </div>
+                                            {% if messages %}
+                                            {% for message in messages%}
+                                             <h2 style="color:green;">{{message}}</h2>
+                                            {% endfor %}
+                                            {% endif %}
                                         </div>
                                     </form>
                                 </div>

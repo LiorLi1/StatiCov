@@ -11,4 +11,7 @@ urlpatterns = [
     path('MainDashBoard', views.MainDashBoard, name='MainDashBoard'),
     path('registration', views.workerinsert, name='registration'),
     path('login', views.get_login_test, name='login'),
+    path('datapatient', views.datapatient, name='datapatient'),
+    path('addpatient', views.addpatient,name='addpatient'),
+    path('home', views.home,name='home'),
 ]

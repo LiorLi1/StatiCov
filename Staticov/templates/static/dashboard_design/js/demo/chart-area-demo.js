@@ -30,7 +30,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 $(document).ready(function(){
   // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
-  $.ajax({url: "http://localhost:8000/Staticov/testdata", success: function(result){
+  $.ajax({url: "http://localhost:8000/Staticov/addpatient", success: function(result){
     var myLineChart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -48,7 +48,7 @@ var ctx = document.getElementById("myAreaChart");
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 2,
-          data: result.map(obj => obj.numbers),
+          data: result.map(obj => obj.age),
         }],
       },
       options: {

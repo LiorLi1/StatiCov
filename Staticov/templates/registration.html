@@ -1,6 +1,6 @@
 {% load static %}  
 <section class="forms-section">
-  <h1 class="section-title">STATICOV בוכים הבאים ל</h1>
+  <h1 class="section-title">STATICOV-ברוכים הבאים ל</h1>
    <!-- Icon -->
    <div class="fadeIn first">
     <img src="{% static 'images/logostaticov.png' %}" id="icon" alt="User Icon" />
@@ -8,25 +8,25 @@
   <div class="forms">
     <div class="form-wrapper is-active">
       <button type="button" class="switcher switcher-login">
-        Login
+        כניסה למערכת
         <span class="underline"></span>
       </button>
-          <form action="registration" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
+          <form action="/Staticov/registration" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
             {% csrf_token %}
             <fieldset>
           <legend>הכנס את ת"ז וסמסמא שלך למערכת</legend>
           <div class="input-block">
             <label for="userid">ת"ז</label>
-            <input type="text" id="userid" minlength="9"  name="userid" class="form-control required">
+            <input type="text" id="userid" minlength="9"  name="userid" placeholder="...הזן מספר ת.ז " class="form-control required">
           </div>
           <div class="input-block">
             <label for="password">סיסמא</label>
-            <input type="text" id="password" minlength="9" name="userid" class="form-control required">
+            <input type="password" id="password" minlength="9" name="userid" placeholder="...הזן סיסמה" class="form-control required">
           </div>
         </fieldset>
-        <button type="submit" class="btn-login">כנס</button>
+        <button type="submit" class="btn-login">כניסה</button>
         {% if messages %}
-        {% for message in messages%}
+        {% for message in messages %}
           <h2 style="color:green;">{{message}}</h2>
         {% endfor %}
         {% endif %}
@@ -37,26 +37,42 @@
         הרשמה
         <span class="underline"></span>
       </button>
-      <form action="index" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
+      <form action="/Staticov/registration" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
         <fieldset>
           {% csrf_token %}
           <legend>אינה הכניס את ת"ז שם וסמסמא כדאי להרשם</legend>
           <div class="input-block">
             <label for="userid">ת"ז</label>
-            <input type="text" minlength="9" id="userid" name="userid" class="form-control required">
+            <input type="text" minlength="9" id="userid" name="userid" placeholder="...הזן מספר ת.ז " class="form-control required">
           </div>
           <div class="input-block">
             <label for="name">שם</label>
-            <input type="text" id="name" name="name" class="form-control required">
+            <input type="text" id="name" name="name" placeholder="...הזן שם משתמש " class="form-control required">
           </div>
           <div class="input-block">
-              <input type="text" id="password" name="password" class="form-control required">
-          </div>
+			  <label for="password">סיסמה</label>
+              <input type="password" id="password" name="password" placeholder="...הזן סיסמה" class="form-control required">
+		  </div>
+		  <div class="input-block">
+		<div class="input-block text-md-right">
+				<label class="form-label" for="contact-symptom">הירשם בתור:</label>
+				<div class="input-block">
+					<select id="text" name="identity" class="form-control required">
+						<option selected></option>
+						<option>אזרח</option>
+						<option>עובד מדינה</option>
+						<option>מנהל</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		
+		 
         </fieldset>
         <button type="submit" class="btn-signup">המשך</button>
         {% if messages %}
         {% for message in messages%}
-          <h2 style="color:green;">{{message}}</h2>
+          <h2 style="color:#5D93FF;">{{message}}</h2>
         {% endfor %}
         {% endif %}
       </form>
@@ -79,7 +95,7 @@
 body {
 	margin: 0;
 	font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-	background: #3b4465;
+	background: #F2F6FF;
 }
 
 .forms-section {
@@ -87,12 +103,13 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	text-align: right;
 }
 
 .section-title {
 	font-size: 32px;
 	letter-spacing: 1px;
-	color: #fff;
+	color: #F65857;
 }
 
 .forms {
@@ -138,7 +155,7 @@ body {
 	font-family: inherit;
 	font-size: 16px;
 	letter-spacing: .5px;
-	color: #999;
+	color: #D4E2FF;
 	background-color: transparent;
 	border: none;
 	outline: none;
@@ -147,12 +164,12 @@ body {
 }
 
 .form-wrapper.is-active .switcher-login {
-	color: #fff;
+	color: #F65857;
 	transform: translateX(90px);
 }
 
 .form-wrapper.is-active .switcher-signup {
-	color: #fff;
+	color: #F65857;
 	transform: translateX(-90px);
 }
 
@@ -195,7 +212,7 @@ body {
 	min-width: 260px;
 	margin-top: 50px;
 	padding: 30px 25px;
-  border-radius: 5px;
+    border-radius: 5px;
 	transform-origin: top;
 }
 
@@ -325,6 +342,22 @@ body {
   border-radius: 2px;
 }
 
+.input-block select {
+	display: block;
+	width: 100%;
+	margin-top: 8px;
+	padding-right: 15px;
+	padding-left: 15px;
+	font-size: 16px;
+	line-height: 40px;
+	color: #3b4465;
+  background: #eef9fe;
+  border: 1px solid #cddbef;
+  border-radius: 2px;
+  text-align: right;
+}
+
+
 .form [type='submit'] {
 	opacity: 0;
 	display: block;
@@ -345,14 +378,14 @@ body {
 
 .btn-login {
 	color: #fbfdff;
-	background: #a7e245;
+	background: #5D93FF;
 	transform: translateX(-30%);
 }
 
 .btn-signup {
-	color: #a7e245;
+	color: #5D93FF;
 	background: #fbfdff;
-	box-shadow: inset 0 0 0 2px #a7e245;
+	box-shadow: inset 0 0 0 2px #5D93FF;
 	transform: translateX(30%);
 }
 

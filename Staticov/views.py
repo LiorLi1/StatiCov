@@ -1,42 +1,48 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponse
-from Staticov.models import Civilianform
-from Staticov.models import contactmainpage
-from Staticov.models import worker_register
 from django.contrib import messages
+import mysql.connector
 
-#from .forms import InsertForm
-# Create your views here.
+
+db_connection = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  database="civilian"
+)
+cursor = db_connection.cursor()
+print(db_connection)
 
 def index(request):
     return render(request,'index.html')
 def home(request):
     return render(request,'worker/about.html')
 def inscription(request):
-    return render(request,'inscriptionform.html')
+    return render(request,'workerregistration.html')
 def registrations(request):
-    return render(request,'registrationform.html')
+    return render(request,'registration.html')
     
 def workerinsert(request):
  if request.method=='POST':
-     saverecord=worker_register()
-     saverecord.userid=request.POST.get('userid')
+     saverecord=RegisterFormModel()
+     saverecord.taz=request.POST.get('taz')
      saverecord.name=request.POST.get('name')
      saverecord.password=request.POST.get('password')
+     saverecord.Type=request.POST.get('Type')
      saverecord.save()
      messages.success(request,'Record Saved Successfully...!')
      return index(request)
  else:
      return registrations(request)
 
-def Homeinsert(request):
+
+def indexcontact(request):
  if request.method=='POST':
-     saverecord=contactmainpage()
-     saverecord.name=request.POST.get('Name')
-     saverecord.email=request.POST.get('email')
+     saverecord=index_form()
+     saverecord.name=request.POST.get('name')
+     saverecord.taz=request.POST.get('taz')
      saverecord.telephone=request.POST.get('telephone')
-     saverecord.religion=request.POST.get('symptomes')
-     saverecord.age=request.POST.get('age')
+     saverecord.symptomes=request.POST.get('symptomes')
      saverecord.save()
      messages.success(request,'Record Saved Successfully...!')
      return index(request)
@@ -62,6 +68,42 @@ def Insertrecord(request):
     return home(request)
 
 
+def get_login_test(request):
+    result = []
+    cursor.execute("SELECT * FROM `registerform`")
+    data = cursor.fetchall()
+    if request.method=='POST':
+         useridtest=request.POST.get('taz')
+         passwordtest=request.POST.get('password')
+    for item in data:
+        ID,name,taz,password,Type = item
+        if useridtest==taz and passwordtest == password:
+            return index(request)
+    messages.error(request,'Please provide valid credentials')   
+    return registrations(request)
+      
 
 
+def get_data_test(request):
+    result = []
+    cursor.execute("SELECT * FROM `worker-register`")
+    data = cursor.fetchall()
+    if request.method=='POST':
+         useridtest=request.POST.get('userid')
+         passwordtest=request.POST.get('password')
+    for item in data:
+        print(item)
+        print(useridtest)
+        print(passwordtest)
+        ID,userid,name,password = item
+        result.append({
+            'userid': userid,
+            'name': name,
+            'password': password,
+            'useridtest' : useridtest,
+            'passwordtest' : passwordtest,     
 
+        })
+        if useridtest==userid and passwordtest == password:
+                print('lalalalal')
+    return HttpResponse(json.dumps(result), content_type="application/json")

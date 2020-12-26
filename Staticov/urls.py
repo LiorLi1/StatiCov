@@ -9,6 +9,6 @@ urlpatterns = [
     path('AdminDash', views.AdminDash, name='AdminDash'),
     path('contact', views.contact, name='contact'),
     path('MainDashBoard', views.MainDashBoard, name='MainDashBoard'),
-    path('test', views.test, name='test'),
-    path('testdata', views.testdata, name='testdata'),
+    path('registration', views.workerinsert, name='registration'),
+    path('login', views.get_login_test, name='login'),
 ]

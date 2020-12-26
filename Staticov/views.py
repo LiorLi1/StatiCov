@@ -1,8 +1,11 @@
 import json
 from django.shortcuts import render
 from django.http import HttpResponse
-from Staticov.models import Civilianform
+from Staticov.models import IndexFormModel
 from Staticov.models import RegisterFormModel
+from Staticov.models import AdminModel
+from Staticov.models import WorkerModel
+from Staticov.models import CivilianModel
 from django.contrib import messages
 import mysql.connector
 
@@ -40,7 +43,7 @@ def workerinsert(request):
 
 def indexcontact(request):
  if request.method=='POST':
-     saverecord=index_form()
+     saverecord=IndexFormModel()
      saverecord.name=request.POST.get('name')
      saverecord.taz=request.POST.get('taz')
      saverecord.telephone=request.POST.get('telephone')

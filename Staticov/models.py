@@ -33,16 +33,6 @@ class CivilianModel(models.Model):
         managed = False
         db_table = 'civilianform'
 
-class IndexFormModel(models.Model):
-    ID=models.IntegerField(db_column='ID',primary_key=True)
-    name=models.TextField(db_column='name')
-    taz=models.CharField(db_column='taz',max_length=9)
-    telephone=models.TextField(db_column='telephone')
-    symptomes=models.TextField(db_column='Symptomes')
-    class Meta:
-        managed = True
-        db_table = 'indexform'
-   
 
 class RegisterFormModel(models.Model):
     ID=models.IntegerField(db_column='ID',primary_key=True)
@@ -53,3 +43,14 @@ class RegisterFormModel(models.Model):
     class Meta:
         managed = False
         db_table = 'registerform'
+
+
+class IndexModel(models.Model):
+    ID=models.IntegerField(db_column='ID',primary_key=True)
+    name=models.TextField(db_column='name')
+    taz=models.CharField(db_column='taz',max_length=9)
+    telephone=models.CharField(db_column='telephone',max_length=11)
+    symptomes=models.TextField(db_column='symptomes')
+    class Meta:
+        managed = False
+        db_table = 'mainpageform'

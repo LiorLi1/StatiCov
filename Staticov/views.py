@@ -28,14 +28,12 @@ def registrations(request):
 def workerinsert(request):
  if request.method=='POST':
      saverecord=Registerform()
-     saverecord.userid=request.POST.get('userid')
+     saverecord.taz=request.POST.get('taz')
      saverecord.name=request.POST.get('name')
      saverecord.password=request.POST.get('password')
+     saverecord.type=request.POST.get('type')
      saverecord.save()
      messages.success(request,'Record Saved Successfully...!')
-     raw_password = saverecord.password
-     user = authenticate(username=saverecord.userid, password= raw_password)
-     login(request, user)
      return index(request)
  else:
      return registrations(request)
@@ -73,16 +71,22 @@ def Insertrecord(request):
 
 
 def get_data_test(request):
-    if request.method=='POST':
-        userid=request.POST.get('userid')
-        password=request.POST.get('password')
-    cursor.execute("SELECT * FROM indexform")
+    result={
+        'data': []
+    }
+    cursor.execute("SELECT * FROM registerform")
     data = cursor.fetchall()
     for item in data:
-        print(item)
-        name, user_id, date, phone, age, place = item
-        
-    return HttpResponse(json.dumps(result), content_type="application/json")
+        id,name,taz,password,type = item
+        result['data'].append({
+            'id':id,
+            'name':name,
+            'taz':taz,
+            'password':password,
+            'type':type,
+        })
+        print(result)
+    return render(request,'table.html', result)
 
 
 

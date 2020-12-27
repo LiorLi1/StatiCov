@@ -22,14 +22,16 @@ def index(request):
     return render(request,'index.html')
 def AdminDash(request):
     return render(request,'AdminDashBoard/index.html')
+def WorkerDash(request):
+    return render(request,'WorkerDashBoard/index.html')
 def contact(request):
     return render(request,'AdminDashBoard/contact.html')
 def MainDashBoard(request):
     return render(request,'MainDashBoard/dashboardindex.html')
 def registration(request):
     return render(request,'registrationform.html')
-def home(request):
-    return render(request,'addpatient.html')
+def add_patient(request):
+    return render(request,'WorkerDashBoard/addpatient.html')
 
 def workerinsert(request):
  if request.method=='POST':
@@ -39,8 +41,8 @@ def workerinsert(request):
      saverecord.password=request.POST.get('password')
      saverecord.Type=request.POST.get('Type')
      saverecord.save()
-     messages.success(request,'Record Saved Successfully...!')
-     return index(request)
+     messages.success(request,'הנתונים נשמרו בהצלחה!')
+     return registration(request)
  else:
      return registration(request)
 
@@ -68,16 +70,15 @@ def get_login_test(request):
          passwordtest=request.POST.get('password')
     for item in data:
        ID,name,taz,password,type = item
-       if useridtest==taz and passwordtest == password and type == 'מנהל':
-            return AdminDash(request)
-       elif useridtest==taz and passwordtest == password and type == 'עובד מדינה':
-           return index(request)
-       elif useridtest==taz and passwordtest == password and type == 'אזרח':
-           return MainDashBoard(request)
-        
+    if useridtest==taz and passwordtest == password and type == 'מנהל':
+        return AdminDash(request)
+    elif useridtest==taz and passwordtest == password and type == 'עובד מדינה':
+        return WorkerDash(request)
+    elif useridtest==taz and passwordtest == password and type == 'אזרח':
+        return index(request) 
+
     messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
-    return registration(request)
-      
+    return registration(request) 
 
 def get_data_test(request):
     result = []
@@ -119,10 +120,10 @@ def addpatient(request):
         saverecord.date=request.POST.get('date')
         saverecord.religion=request.POST.get('religion')
         saverecord.save()
-        messages.success(request,'Record Saved Successfully...!')
-        return home(request)
+        messages.success(request,'הנתונים נשמרו בהצלחה!')
+        return WorkerDash(request)
     else:
-        return home(request)
+        return add_patient(request)
 
     
             

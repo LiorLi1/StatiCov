@@ -1,33 +1,34 @@
 <form action="/Staticov/addpatient" method="POST" id="login-form" class="login-form" autocomplete="off" role="main">
   {% csrf_token %}
    <div>
-    <h1> הכנסה פרטים  </h1>
+    <h1>הכנסת פרטים - חולה חדש</h1>
   </div>
   <div class="input-block">
-    <label for="taz">taz</label>
-    <input type="taz" id="taz" name="taz" placeholder="...הזן סיסמה" class="form-control required">
+    <label for="taz">תעודת זהות</label>
+    <input type="taz" id="taz" name="taz" placeholder="" class="form-control required">
   </div>
 </div>
 <div class="input-block">
-  <label for="age">age</label>
-  <input type="age" id="age" name="age" placeholder="...הזן סיסמה" class="form-control required">
+  <label for="age">גיל</label>
+  <input type="age" id="age" name="age" placeholder="" class="form-control required">
 </div>
 </div>
 <div class="input-block">
-  <label for="place">place</label>
-  <input type="place" id="place" name="place" placeholder="...הזן סיסמה" class="form-control required">
+  <label for="place">עיר</label>
+  <input type="place" id="place" name="place" placeholder="" class="form-control required">
 </div>
 </div>
 <div class="input-block">
-  <label for="date">date</label>
-  <input type="date" id="date" name="date" placeholder="...הזן סיסמה" class="form-control required">
+  <label for="date">תאריך הידבקות</label>
+  <input type="date" id="date" name="date" placeholder="" class="form-control required">
 </div>
 </div>
 <div class="input-block">
-  <label for="religion">religion</label>
-  <input type="religion" id="religion" name="religion" placeholder="...הזן סיסמה" class="form-control required">
+  <label for="religion">דת</label>
+  <input type="religion" id="religion" name="religion" placeholder="HI/MASOR/HAR" class="form-control required">
 </div>
-  <input type="submit" value="שלח" />
+  <div class="input-block">
+  <input type="submit" value="שליחה"/>
   {% if messages %}
   {% for message in messages%}
     <h2 style="color:green;">{{message}}</h2>
@@ -46,8 +47,8 @@
     <div class="shirt-1"></div>
     <div class="shirt-2"></div>
   </figure>
-
 </form>
+
 <style>
   .religion {
 	display: block;
@@ -92,7 +93,7 @@
 }
   html, body {
   align-items: center;
-  background: #4D6879;
+  background: #F2F6FF;
   border: 0;
   display: flex;
   font-family: Helvetica, Arial, sans-serif;
@@ -100,7 +101,7 @@
   height: 100%;
   justify-content: center;
   margin: 0;
-  padding: 150px;
+  padding: 60px;
 }
 
 form {
@@ -128,6 +129,7 @@ form {
   padding: 1rem;
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 form .email, form .email a {
@@ -262,6 +264,7 @@ input[type="submit"]:hover {
 input[type="submit"]:active {
   background: hsl(var(--fgColorH), calc(var(--fgColorS) * 2), calc(var(--fgColorL) * 1.15));
   transition: all 0.125s;
+
 }
 
 /** Checkbox styling */

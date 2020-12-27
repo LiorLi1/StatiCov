@@ -30,11 +30,11 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 $(document).ready(function(){
   // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
-  $.ajax({url: "http://localhost:8000/Staticov/addpatient", success: function(result){
+  $.ajax({url: "http://localhost:8000/Staticov/datapatient", success: function(result){
     var myLineChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["2.12.2020", "6.12.2020", "8.12.2020", "10.12.2020", "13.12.2020", "14.12.2020", "15.12.2020", "16.12.2020", "17.12.2020", "20.12.2020"],
+        labels: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90"],
         datasets: [{
           label: "",
           lineTension: 0.3,
@@ -48,7 +48,7 @@ var ctx = document.getElementById("myAreaChart");
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 2,
-          data: result.map(obj => obj.age),
+          data: result.map(obj => obj),
         }],
       },
       options: {
@@ -64,7 +64,7 @@ var ctx = document.getElementById("myAreaChart");
         scales: {
           xAxes: [{
             time: {
-              unit: 'date'
+              unit: 'age'
             },
             gridLines: {
               display: false,

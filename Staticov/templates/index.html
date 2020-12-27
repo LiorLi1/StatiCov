@@ -16,10 +16,11 @@
     <!-- Bundle and Base CSS -->
     <link rel="stylesheet"  href="{% static 'assets/css/styles-azure.css' %}">
     <link rel="stylesheet"  href="{% static 'assets/css/bundle.css' %}">
-
 </head>
 
 <body class="nk-body" dir="rtl">
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v9.0" nonce="JFESar5r"></script>
 
     <div class="nk-wrap">
         <header class="nk-header bg-light-grad-a has-overlay" id="home">
@@ -51,6 +52,7 @@
                             </ul>
                             <ul class="nk-menu-btns">
                                 <li class="nk-menu-item"><a href="/Staticov/registration" class="btn btn-sm tog"> הרשמה וכניסה</a></li>
+                                <div class="fb-share-button" data-href="http://localhost:8000/Staticov/index" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8000%2FStaticov%2Findex&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share Staticov </a></div>
                             </ul>
                         </nav><!-- .nk-navbar-menu -->
                     </div><!-- .nk-navbar-wrap -->

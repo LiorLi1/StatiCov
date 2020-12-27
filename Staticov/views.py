@@ -18,6 +18,8 @@ db_connection = mysql.connector.connect(
 cursor = db_connection.cursor()
 print(db_connection)
 
+def home(request):
+    return render(request,'home.html')
 def index(request):
     return render(request,'index.html')
 def AdminDash(request):

@@ -41,7 +41,7 @@ class RegisterFormModel(models.Model):
     password=models.TextField(db_column='password')
     Type=models.TextField(db_column='type')
     class Meta:
-        managed = False
+        managed = True
         db_table = 'registerform'
 
 

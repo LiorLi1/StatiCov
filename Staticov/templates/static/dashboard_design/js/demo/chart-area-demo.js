@@ -1,6 +1,52 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 //Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+var charData=null;
+$.ajax({url:"http://localhost:8000/Staticov/datapatient",success:function(result){
+  
 
+}});
+
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [1,5,10,20,30,40,60,80,100,120],
+    datasets: [{ 
+        data: [86,114,106,106,107,111,133,221,783,2478],
+        label: "באר שבע",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [282,350,411,502,635,809,947,1402,3700,5267],
+        label: "תל אביב",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [168,170,178,190,203,276,408,547,675,734],
+        label: "אילת",
+        borderColor: "#3cba9f",
+        fill: false
+      }, { 
+        data: [40,20,10,16,24,38,74,167,508,784],
+        label: "חיפה",
+        borderColor: "#e8c3b9",
+        fill: false
+      }, { 
+        data: [6,3,2,2,7,26,82,172,312,433],
+        label: "ירושלים",
+        borderColor: "#c45850",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'מספר נדבקים לעיר'
+    }
+  }
+});
+
+/*
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -25,8 +71,10 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+*/
 
 
+/*
 $(document).ready(function(){
   // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
@@ -122,5 +170,7 @@ var ctx = document.getElementById("myAreaChart");
   }});
   
 });
+
+*/
 
 

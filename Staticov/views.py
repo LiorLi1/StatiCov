@@ -19,6 +19,7 @@ cursor = db_connection.cursor()
 print(db_connection)
 
 def home(request):
+    get_login_test(request)
     return render(request,'home.html')
 def index(request):
     return render(request,'index.html')
@@ -52,7 +53,7 @@ def workerinsert(request):
 
 def indexcontact(request):
  if request.method=='POST':
-     saverecord=IndexFormModel()
+     saverecord=IndexModel()
      saverecord.name=request.POST.get('name')
      saverecord.taz=request.POST.get('taz')
      saverecord.telephone=request.POST.get('telephone')
@@ -109,25 +110,21 @@ def get_data_test(request):
 
 
 def CHANGE_PASSWORD_TEST(request):
-    result = []
-    cursor.execute("SELECT * FROM `registerform`")
-    data = cursor.fetchall()    
     if request.method=='POST':
-         useridtest=request.POST.get('taz')
-         passwordtest=request.POST.get('password') 
-    for item in data:
-        ID,name,taz,password,type = item
-        if useridtest==taz:
-            cursor.execute("UPDATE `registerform` SET password = '%s' WHERE registerform.ID = '%s'"%(passwordtest,taz))
-            db_connection.commit()
-            return index(request)
-    else :
-        messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
-        return registration(request)
-    
-        
-       
-
+        useridtest=request.POST.get('taz')
+        passwordtest=request.POST.get('password') 
+        result = []
+        cursor.execute("SELECT * FROM `registerform`")
+        data = cursor.fetchall()    
+        for item in data:
+            ID,name,taz,password,type = item
+            if taz==useridtest:
+                cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
+                db_connection.commit()
+                return index(request)
+        else:
+            messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
+            return registration(request)
 
 def datapatient(request):
     if request.method == 'GET':

@@ -22,6 +22,8 @@ def home(request):
     return render(request,'home.html')
 def index(request):
     return render(request,'index.html')
+def rate(request):
+    return render(request,'rating.html')
 def AdminDash(request):
     return render(request,'AdminDashBoard/index.html')
 def WorkerDash(request):
@@ -34,6 +36,8 @@ def registration(request):
     return render(request,'registrationform.html')
 def add_patient(request):
     return render(request,'WorkerDashBoard/addpatient.html')
+def privacy(request):
+    return render(request,'privacy_policy.html')
 
 def workerinsert(request):
  if request.method=='POST':

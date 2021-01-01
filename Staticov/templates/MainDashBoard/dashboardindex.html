@@ -16,6 +16,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}" type="text/javascript"></script>
   <script src="{%static 'dashboard_design/js/demo/chart-pie-demo.js' %}" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -159,7 +161,7 @@
             <div class="col-xl-8 col-lg-7">
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">נתונים אחרונים- חודש דצמבר 12</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">נתונים אחרונים 2020</h6>
                   <div class="dropdown no-arrow">
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                       aria-labelledby="dropdownMenuLink">
@@ -168,9 +170,9 @@
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myAreaChart" width="600" height="400"></canvas>
-                     <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}">
-                     </script>
+                    <canvas id="line-chart" width="600" height="250" style="margin:10px;"></canvas>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
                   </div>
                 </div>
               </div>
@@ -368,7 +370,9 @@
   <script src="{%static 'dashboard_design/js/ruang-admin.min.js' %}"></script>
   <script src="{%static 'dashboard_design/vendor/chart.js/Chart.min.js' %}"></script>
   <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}"></script>  
-  <script src="{%static 'dashboard_design/js/demo/chart-pie-demo.js' %}"></script>  
+  <script src="{%static 'dashboard_design/js/demo/chart-pie-demo.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 </body>
 
 </html>

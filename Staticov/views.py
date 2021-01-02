@@ -18,8 +18,7 @@ db_connection = mysql.connector.connect(
 cursor = db_connection.cursor()
 print(db_connection)
 
-def home(request):
-    get_login_test(request)
+def home(request): 
     return render(request,'home.html')
 def index(request):
     return render(request,'index.html')
@@ -36,7 +35,7 @@ def registration(request):
 def add_patient(request):
     return render(request,'WorkerDashBoard/addpatient.html')
 def testpassword(request):
-    return render(request,'testpassword.html')
+    return render(request,'changepassword.html')
 
 def workerinsert(request):
  if request.method=='POST':
@@ -78,10 +77,10 @@ def get_login_test(request):
     elif useridtest==taz and passwordtest == password and type == 'עובד מדינה':
         return WorkerDash(request)
     elif useridtest==taz and passwordtest == password and type == 'אזרח':
-        return index(request) 
+        return render(request,'index.html') 
 
     messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
-    return registration(request) 
+    return testpassword(request) 
 
 ########################## TEST DATA GET ############################################
 def get_data_test(request):
@@ -112,26 +111,37 @@ def get_data_test(request):
 def CHANGE_PASSWORD_TEST(request):
     if request.method=='POST':
         useridtest=request.POST.get('taz')
-        passwordtest=request.POST.get('password') 
+        passwordcurrentpassword=request.POST.get('current_password')
+        passwordtest=request.POST.get('password')
         result = []
         cursor.execute("SELECT * FROM `registerform`")
         data = cursor.fetchall()    
         for item in data:
             ID,name,taz,password,type = item
-            if taz==useridtest:
+            if taz==useridtest and password == passwordcurrentpassword :
                 cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
                 db_connection.commit()
                 return index(request)
         else:
             messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
-            return registration(request)
-
-def datapatient(request):
-    if request.method == 'GET':
-        cursor.execute("SELECT * FROM `formcivilian`")
-        data = cursor.fetchall()
-        data_list = list(data)
-        return JsonResponse(data_list, safe=False)
+            return testpassword(request)
+def get_data_table(request):
+    result={
+        'data': []
+    }
+    cursor.execute("SELECT * FROM `registerform`")
+    data = cursor.fetchall()
+    for item in data:
+        id,name,taz,password,type = item
+        result['data'].append({
+            'id':id,
+            'name':name,
+            'taz':taz,
+            'password':password,
+            'type':type,
+        })
+        print(result)
+    return render(request,'testpassword.html', result)
 
 def addpatient(request):
     if request.method=='POST':
@@ -147,5 +157,3 @@ def addpatient(request):
     else:
         return add_patient(request)
 
-    
-            

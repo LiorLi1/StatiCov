@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render
 from django.http import HttpResponse
-from Staticov.models import Admin,Civilian,Indexform,Registerform,Worker
+from Staticov.models import Admin,Civilian,Indexform,Registerform,Worker,Patientworker
 from django.contrib import messages
 import mysql.connector
 
@@ -87,6 +87,40 @@ def get_data_test(request):
         })
         print(result)
     return render(request,'table.html', result)
+
+def get_data_table(request):
+    result={
+        'data': []
+    }
+    cursor.execute("SELECT * FROM `registerform`")
+    data = cursor.fetchall()
+    for item in data:
+        id,name,taz,password,type = item
+        if type=='עובד מדינה':
+            result['data'].append({
+                'id':id,
+                'name':name,
+                'taz':taz,
+                'password':password,
+                'type':type,
+            })
+            print(result)
+    return render(request,'addworker.html', result)
+
+def new_worker(request):
+    if request.method=='POST':
+        saverecord=Patientworker()
+        saverecord.telephone=request.POST.get('telephone')
+        saverecord.taz=request.POST.get('taz')
+        saverecord.workerid=request.POST.get('workerid')
+        saverecord.save()
+        messages.success(request,'Record Saved Successfully...!')
+        return render(request,'addworker.html')
+    else:
+        messages.error(request,'Error')
+        return render(request,'addworker.html')
+
+        
 
 
 

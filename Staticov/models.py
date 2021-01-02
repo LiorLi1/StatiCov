@@ -63,3 +63,13 @@ class Worker(models.Model):
         managed = False
         db_table = 'worker'
 
+
+class Patientworker(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    telephone = models.CharField(max_length=11)
+    taz = models.CharField(max_length=9)
+    workerid = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'patientworker'

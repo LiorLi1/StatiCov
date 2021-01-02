@@ -11,4 +11,6 @@ urlpatterns = [
     path('registration',views.workerinsert),
     path('indexform',views.indexcontact),
     path('get_data_test', views.get_data_test),
+    path('get_data_table',views.get_data_table),
+    path('new_worker',views.new_worker)
    ]

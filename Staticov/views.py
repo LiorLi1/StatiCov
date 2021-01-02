@@ -154,7 +154,7 @@ def new_patient(request):
 
 def datapatient(request):
     if request.method == 'GET':
-        cursor.execute("SELECT * FROM `formcivilian`")
+        cursor.execute("SELECT * FROM formcivilian")
         data = cursor.fetchall()
         data_list = list(data)
         return JsonResponse(data_list, safe=False)

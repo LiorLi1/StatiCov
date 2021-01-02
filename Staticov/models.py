@@ -25,14 +25,15 @@ class AdminModel(models.Model):
         managed = False
         db_table = 'admin'
 
-class WorkerModel(models.Model):
+class WorkersModel(models.Model):
     ID=models.IntegerField(db_column='ID',primary_key=True)
     name=models.TextField(db_column='Name')
     taz=models.CharField(db_column='TAZ',max_length=9)
     password=models.TextField(db_column='Password')
+    Type=models.TextField(db_column='type')
     class Meta:
         managed = False
-        db_table = 'worker'
+        db_table = 'workers'
 
 class CivilianModel(models.Model):
     ID=models.IntegerField(db_column='ID',primary_key=True)
@@ -65,3 +66,13 @@ class RegisterFormModel(models.Model):
     class Meta:
         managed = False
         db_table = 'registerform'
+
+class Patientworker(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    telephone = models.CharField(max_length=11)
+    taz = models.CharField(max_length=9)
+    workerid = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'patientworker'

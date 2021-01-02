@@ -81,6 +81,7 @@ function handleError(error){
 
 $.ajax({url:"http://localhost:8000/Staticov/datapatient", success: handleData, error: handleError});
 
+
 // new Chart(document.getElementById("line-chart"), {
 //   type: 'line',
 //   data: {

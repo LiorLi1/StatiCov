@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from Staticov.models import AdminModel
+from Staticov.models import Patientworker
 from Staticov.models import CivilianModel
 from Staticov.models import IndexFormModel
 from Staticov.models import RegisterFormModel
-from Staticov.models import WorkerModel
+from Staticov.models import WorkersModel
 from django.contrib import messages
 import mysql.connector
 # Create your views here.
@@ -33,11 +34,21 @@ def contact(request):
 def MainDashBoard(request):
     return render(request,'MainDashBoard/dashboardindex.html')
 def registration(request):
+    #regular registration before 
     return render(request,'registrationform.html')
 def add_patient(request):
+    #worker page -> to insert new patient to the form_civilian_db
     return render(request,'WorkerDashBoard/addpatient.html')
 def privacy(request):
     return render(request,'privacy_policy.html')
+def changepassword(request):
+    #page to change password to all users
+    return render(request, 'changepassword.html')
+def patientworker(request):
+    #page to assign new patients to workers
+    return render(request,'patienttoworker.html')
+def addworker(request):
+    return render(request,'AdminDashBoard/addworker.html')
 
 def workerinsert(request):
  if request.method=='POST':
@@ -75,13 +86,13 @@ def get_login_test(request):
          useridtest=request.POST.get('taz')
          passwordtest=request.POST.get('password')
     for item in data:
-       ID,name,taz,password,type = item
-    if useridtest==taz and passwordtest == password and type == 'מנהל':
-        return AdminDash(request)
-    elif useridtest==taz and passwordtest == password and type == 'עובד מדינה':
-        return WorkerDash(request)
-    elif useridtest==taz and passwordtest == password and type == 'אזרח':
-        return index(request) 
+        ID,name,taz,password,type = item
+        if useridtest==taz and passwordtest == password and type == 'מנהל':
+             return AdminDash(request)
+        elif useridtest==taz and passwordtest == password and type == 'עובד מדינה':
+             return WorkerDash(request)
+        elif useridtest==taz and passwordtest == password and type == 'אזרח':
+             return index(request) 
 
     messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
     return registration(request) 
@@ -108,7 +119,38 @@ def get_data_test(request):
         })
         if useridtest==userid and passwordtest == password:
                 print('lalalalal')
-    return HttpResponse(json.dumps(result), content_type="application/json")
+    return HttpResponse(JSON.dumps(result), content_type="application/json")
+
+def CHANGE_PASSWORD_TEST(request):
+    if request.method=='POST':
+        useridtest=request.POST.get('taz')
+        passwordcurrentpassword=request.POST.get('current_password')
+        passwordtest=request.POST.get('password')
+        result = []
+        cursor.execute("SELECT * FROM `registerform`")
+        data = cursor.fetchall()    
+        for item in data:
+            ID,name,taz,password,type = item
+            if taz==useridtest and password == passwordcurrentpassword :
+                cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
+                db_connection.commit()
+                return index(request)
+        else:
+            messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
+            return changepassword(request)
+
+def new_patient(request):
+    if request.method=='POST':
+        saverecord=Patientworker()
+        saverecord.telephone=request.POST.get('telephone')
+        saverecord.taz=request.POST.get('taz')
+        saverecord.workerid=request.POST.get('workerid')
+        saverecord.save()
+        messages.success(request,'Record Saved Successfully...!')
+        return render(request,'patienttoworker.html')
+    else:
+        messages.error(request,'Error')
+        return render(request,'patienttoworker.html')
 
 def datapatient(request):
     if request.method == 'GET':
@@ -130,6 +172,37 @@ def addpatient(request):
         return WorkerDash(request)
     else:
         return add_patient(request)
+
+def after_approuval_worker_insert(request):
+ if request.method=='POST':
+     saverecord=WorkersModel()
+     saverecord.taz=request.POST.get('taz')
+     saverecord.name=request.POST.get('name')
+     saverecord.password=request.POST.get('password')
+     saverecord.Type=request.POST.get('Type')
+     saverecord.save()
+     messages.success(request,'הנתונים נשמרו בהצלחה!')
+     return addworker(request)
+ else:
+     return addworker(request)
+
+def get_data_table(request):
+    result={
+        'data': []
+    }
+    cursor.execute("SELECT * FROM registerform")
+    data = cursor.fetchall()
+    for item in data:
+        ID,name,taz,password,type = item
+        result['data'].append({
+            'id':ID,
+            'name':name,
+            'taz':taz,
+            'password':password,
+            'type':type,
+        })
+        print(result)
+    return render(request,'AdminDashBoard/addworker.html', result)
 
     
             

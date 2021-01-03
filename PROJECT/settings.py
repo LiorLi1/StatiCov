@@ -132,7 +132,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    'C:/Users/kevyn/GitHub/STATICOV/StatiCov/Staticov/templates/static',
+    'C:/Users/liron/Desktop/StaticovLi/Staticov/templates/static',
 ]
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',

@@ -1,6 +1,11 @@
 import json
 from django.shortcuts import render
 from django.http import HttpResponse
+from Staticov.models import IndexModel
+from Staticov.models import RegisterFormModel
+from Staticov.models import AdminModel
+from Staticov.models import WorkerModel
+from Staticov.models import CivilianModel
 from django.contrib import messages
 import mysql.connector
 
@@ -16,29 +21,36 @@ print(db_connection)
 def index(request):
     return render(request,'index.html')
 def home(request):
-    return render(request,'worker/about.html')
-def inscription(request):
-    return render(request,'workerregistration.html')
+    return render(request,'addpatiente.html')
 def registrations(request):
-    return render(request,'registration.html')
+    return render(request,'registrationform.html')
+def faq(request):
+    return render(request,'faq.html')
     
 def workerinsert(request):
- if request.method=='POST':
-     saverecord=RegisterFormModel()
-     saverecord.taz=request.POST.get('taz')
-     saverecord.name=request.POST.get('name')
-     saverecord.password=request.POST.get('password')
-     saverecord.Type=request.POST.get('Type')
-     saverecord.save()
-     messages.success(request,'Record Saved Successfully...!')
-     return index(request)
- else:
-     return registrations(request)
+    result = []
+    cursor.execute("SELECT * FROM `registerform`")
+    data = cursor.fetchall()   
+    if request.method=='POST':
+        saverecord=RegisterFormModel()
+        saverecord.taz=request.POST.get('taz')
+        saverecord.name=request.POST.get('name')
+        saverecord.password=request.POST.get('password')
+        saverecord.Type=request.POST.get('Type')
+        for item in data:
+            ID,name,taz,password,Type = item
+            if saverecord.taz==taz:
+                 messages.error(request,'TAZ already used.')   
+                 return registrations(request)
+        saverecord.save()
+        messages.success(request,'Record Saved Successfully...!')
+    else:
+        return registrations(request)
 
 
 def indexcontact(request):
  if request.method=='POST':
-     saverecord=index_form()
+     saverecord=IndexModel()
      saverecord.name=request.POST.get('name')
      saverecord.taz=request.POST.get('taz')
      saverecord.telephone=request.POST.get('telephone')
@@ -48,24 +60,6 @@ def indexcontact(request):
      return index(request)
  else:
      return index(request)
-
-
-def Insertrecord(request):
- if request.method=='POST':
-     saverecord=Civilianform()
-     saverecord.name=request.POST.get('Name')
-     saverecord.ID=request.POST.get('ID')
-     saverecord.telephone=request.POST.get('telephone')
-     saverecord.date=request.POST.get('DATE')
-     saverecord.religion=request.POST.get('Religion')
-     saverecord.age=request.POST.get('age')
-     saverecord.place=request.POST.get('Place')
-     saverecord.email=request.POST.get('email')
-     saverecord.save()
-     messages.success(request,'Record Saved Successfully...!')
-     return home(request)
- else:
-    return home(request)
 
 
 def get_login_test(request):
@@ -83,10 +77,9 @@ def get_login_test(request):
     return registrations(request)
       
 
-
 def get_data_test(request):
     result = []
-    cursor.execute("SELECT * FROM `worker-register`")
+    cursor.execute("SELECT * FROM civilianform")
     data = cursor.fetchall()
     if request.method=='POST':
          useridtest=request.POST.get('userid')
@@ -104,6 +97,4 @@ def get_data_test(request):
             'passwordtest' : passwordtest,     
 
         })
-        if useridtest==userid and passwordtest == password:
-                print('lalalalal')
     return HttpResponse(json.dumps(result), content_type="application/json")

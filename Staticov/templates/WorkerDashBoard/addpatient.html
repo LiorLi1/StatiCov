@@ -1,3 +1,12 @@
+{% load static %}
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="{%static 'images/logostaticov.png' %}" rel="icon">
+<title>חולה חדש | הזנת נתונים</title>
+</head>
+
 <form action="/Staticov/addpatient" method="POST" id="login-form" class="login-form" autocomplete="off" role="main">
   {% csrf_token %}
    <div>
@@ -15,7 +24,7 @@
 </div>
 <div class="input-block">
   <label for="place">עיר</label>
-  <input type="place" id="place" name="place" placeholder="" class="form-control required">
+  <input type="place" id="place" name="place" placeholder="EILAT/BS/JERU..." class="form-control required">
 </div>
 </div>
 <div class="input-block">
@@ -25,7 +34,7 @@
 </div>
 <div class="input-block">
   <label for="religion">דת</label>
-  <input type="religion" id="religion" name="religion" placeholder="HI/MASOR/HAR" class="form-control required">
+  <input type="religion" id="religion" name="religion" placeholder="HI/MASOR/HAR/BLI..." class="form-control required">
 </div>
   <div class="input-block">
   <input type="submit" value="שליחה"/>

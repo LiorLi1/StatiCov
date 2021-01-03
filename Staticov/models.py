@@ -76,3 +76,17 @@ class Patientworker(models.Model):
     class Meta:
         managed = False
         db_table = 'patientworker'
+
+class SymptomesFormModel(models.Model):
+    ID=models.IntegerField(db_column='ID',primary_key=True)
+    head=models.TextField(db_column='head')
+    hot=models.TextField(db_column='hot')
+    smell=models.TextField(db_column='smell')
+    hurts=models.TextField(db_column='hurts')
+    class Meta:
+        managed = False
+        db_table = 'symptomesform'
+
+
+
+

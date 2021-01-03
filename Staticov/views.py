@@ -7,6 +7,7 @@ from Staticov.models import CivilianModel
 from Staticov.models import IndexFormModel
 from Staticov.models import RegisterFormModel
 from Staticov.models import WorkersModel
+from Staticov.models import SymptomesFormModel
 from django.contrib import messages
 import mysql.connector
 # Create your views here.
@@ -49,6 +50,8 @@ def patientworker(request):
     return render(request,'patienttoworker.html')
 def addworker(request):
     return render(request,'AdminDashBoard/addworker.html')
+def check_symptomes(request):
+    return render(request,'Symptoms_Questionnaire.html')
 
 def workerinsert(request):
  if request.method=='POST':
@@ -80,7 +83,7 @@ def indexcontact(request):
 
 def get_login_test(request):
     result = []
-    cursor.execute("SELECT * FROM `registerform`")
+    cursor.execute("SELECT * FROM workers")
     data = cursor.fetchall()
     if request.method=='POST':
          useridtest=request.POST.get('taz')
@@ -91,7 +94,11 @@ def get_login_test(request):
              return AdminDash(request)
         elif useridtest==taz and passwordtest == password and type == 'עובד מדינה':
              return WorkerDash(request)
-        elif useridtest==taz and passwordtest == password and type == 'אזרח':
+    cursor.execute("SELECT * FROM registerform")
+    data = cursor.fetchall()
+    for item in data:
+        ID,name,taz,password,type = item
+        if useridtest==taz and passwordtest == password and type == 'אזרח':
              return index(request) 
 
     messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
@@ -127,7 +134,15 @@ def CHANGE_PASSWORD_TEST(request):
         passwordcurrentpassword=request.POST.get('current_password')
         passwordtest=request.POST.get('password')
         result = []
-        cursor.execute("SELECT * FROM `registerform`")
+        cursor.execute("SELECT * FROM workers")
+        data = cursor.fetchall()    
+        for item in data:
+            ID,name,taz,password,type = item
+            if taz==useridtest and password == passwordcurrentpassword :
+                cursor.execute("UPDATE `workers` SET `password` = '%s' WHERE `workers`.`ID` = '%s';"%(passwordtest,ID))
+                db_connection.commit()
+                return index(request)
+        cursor.execute("SELECT * FROM registerform")
         data = cursor.fetchall()    
         for item in data:
             ID,name,taz,password,type = item
@@ -204,9 +219,29 @@ def get_data_table(request):
         print(result)
     return render(request,'AdminDashBoard/addworker.html', result)
 
-    
-            
-
+def symptomesformcheck(request):
+    result = []
+    cursor.execute("SELECT * FROM symptomesform")
+    data = cursor.fetchall()
+    if request.method=='POST':
+         headtest=request.POST.get('head')
+         hottest=request.POST.get('hot')
+         smelltest=request.POST.get('smell')
+         hurtstest=request.POST.get('hurts')
+    if  headtest=='yes' and hottest=='yes' and smelltest =='yes' and hurtstest == 'yes':
+         messages.success(request,'Record Saved Successfully...!')
+         return index(request)
+    elif headtest=='no' and hottest=='yes' and smelltest =='no' and hurtstest == 'yes':
+         messages.success(request,'Record Saved Successfully...!')
+         return index(request)
+    elif headtest=='yes' and hottest=='yes' and smelltest =='no' and hurtstest == 'no':
+         messages.success(request,'Record Saved Successfully...!')
+         return index(request)
+    elif headtest=='no' and hottest=='yes' and smelltest =='yes' and hurtstest == 'yes':
+         messages.success(request,'Record Saved Successfully...!')
+         return index(request)
+    else:
+         return index(request)
 
 
 

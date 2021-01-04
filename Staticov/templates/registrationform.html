@@ -31,7 +31,7 @@
             <label for="password">סיסמא</label>
             <input type="password" id="password" name="password" placeholder="...הזן סיסמה" class="form-control required">
           </div>
-        </fieldset>
+		</fieldset>
         <button type="submit" class="btn-login">כניסה</button>
         {% if messages %}
         {% for message in messages %}
@@ -386,6 +386,7 @@ body {
 .btn-login {
 	color: #fbfdff;
 	background: #5D93FF;
+	box-shadow: inset 0 0 0 2px #5D93FF;
 	transform: translateX(-30%);
 }
 

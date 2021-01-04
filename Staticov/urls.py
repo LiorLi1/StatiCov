@@ -26,4 +26,5 @@ urlpatterns = [
     path('addworkerafterapproval', views.after_approuval_worker_insert),
     path('get_data_table', views.get_data_table),
     path('checksymptoms', views.check_symptomes),
+    path('symptomesformcheck', views.symptomesformcheck),
 ]

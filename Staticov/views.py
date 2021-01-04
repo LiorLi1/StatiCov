@@ -141,7 +141,6 @@ def CHANGE_PASSWORD_TEST(request):
             if taz==useridtest and password == passwordcurrentpassword :
                 cursor.execute("UPDATE `workers` SET `password` = '%s' WHERE `workers`.`ID` = '%s';"%(passwordtest,ID))
                 db_connection.commit()
-                return index(request)
         cursor.execute("SELECT * FROM registerform")
         data = cursor.fetchall()    
         for item in data:
@@ -220,25 +219,25 @@ def get_data_table(request):
     return render(request,'AdminDashBoard/addworker.html', result)
 
 def symptomesformcheck(request):
-    result = []
-    cursor.execute("SELECT * FROM symptomesform")
-    data = cursor.fetchall()
     if request.method=='POST':
          headtest=request.POST.get('head')
          hottest=request.POST.get('hot')
          smelltest=request.POST.get('smell')
          hurtstest=request.POST.get('hurts')
-    if  headtest=='yes' and hottest=='yes' and smelltest =='yes' and hurtstest == 'yes':
-         messages.success(request,'Record Saved Successfully...!')
+    if  headtest=='כן' and hottest=='כן' and smelltest =='כן' and hurtstest == 'כן':
+         messages.success(request,'ממולץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
-    elif headtest=='no' and hottest=='yes' and smelltest =='no' and hurtstest == 'yes':
-         messages.success(request,'Record Saved Successfully...!')
+    elif headtest=='לא' and hottest=='כן' and smelltest =='לא' and hurtstest == 'כן':
+         messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
-    elif headtest=='yes' and hottest=='yes' and smelltest =='no' and hurtstest == 'no':
-         messages.success(request,'Record Saved Successfully...!')
+    elif headtest=='כן' and hottest=='כן' and smelltest =='לא' and hurtstest == 'לא':
+         messages.success(request,'מומלץ לבצע בדיקה חנגיף הקורונה')
          return index(request)
-    elif headtest=='no' and hottest=='yes' and smelltest =='yes' and hurtstest == 'yes':
-         messages.success(request,'Record Saved Successfully...!')
+    elif headtest=='לא' and hottest=='כן' and smelltest =='כן' and hurtstest == 'כן':
+         messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
+         return index(request)
+    elif headtest=='לא' and hottest=='לא' and smelltest =='לא' and hurtstest == 'לא':
+         messages.success(request,'במידה ואין שום תסמינים אין צורך לבצע בדיקה לנגיף הקורונה')
          return index(request)
     else:
          return index(request)

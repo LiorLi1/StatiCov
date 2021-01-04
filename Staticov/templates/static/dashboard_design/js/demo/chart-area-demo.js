@@ -38,18 +38,18 @@ function handleData(data){
     data,
     entry => getDateByMonthAndYear(entry[CITY_INDEX])
   );
-  console.log(JSON.stringify(groupedDataByCity));
+ /// console.log(JSON.stringify(groupedDataByCity));
   const labels = Object.values(MONTHS);
   const datasets = Object.keys(groupedDataByCity).map((entryKey, index) => {
     const entry = groupedDataByCity[entryKey];
-    console.log(JSON.stringify(entry))
+    //console.log(JSON.stringify(entry))
     var patientsPerMonths = entry.reduce((acc,next) => {
       var month = next[4].split('-')[1]
       acc[month] = (acc[month] || 0 ) + 1
       return acc
       },{ '01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'09':0,'10':0,'11':0,'12':0}
       )    
-      console.log(entryKey)
+      //console.log(entryKey)
     return {
           data: Object.values(patientsPerMonths),
           label: entryKey,

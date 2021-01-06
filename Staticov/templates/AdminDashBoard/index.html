@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{% static 'admindesign/css/style.default.css' %}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{% static 'admindesign/css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard_design/css/popup.css' %}">
 
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.png?3">
@@ -93,12 +94,13 @@
             <div id="content-formatting" class="card mb-4">
               <div class="card-header"><b>אפשרויות</b></div>
               <div class="card-body text-xl">
-                <a href="#" target="_blank">יצירת הודעות מתפרצות</a><br><br>
-                <a href="#">לוח הזמנים שלי</a><br><br>
-                <a href="/Staticov/get_data_table">הוספת עובד\ת מדינה חדש\ה</a><br><br>
-                <a href="/Staticov/patient_to_worker">רשימת חולים חדשים</a><br>
-                <a href="/Staticov/change_password">שינוי סיסמא למערכת</a><br><br>
-                <a href='https://www.counters-free.net/'>Hit Counters free</a>
+                <a href="#popup1">יצירת הודעות מתפרצות</a><br><br>
+                <a href="/Staticov/shift_offers">קבע משמרות לעובדים</a><br><br>
+                <a href="/Staticov/get_new_workers_table">הוספת עובד\ת מדינה חדש\ה</a><br><br>
+                <a href="/Staticov/get_workers_table">מחיקת עובד\ת</a><br><br>
+                <a href="/Staticov/get_new_positiv_table">רשימת חולים חדשים</a><br><br>
+                <a href="/Staticov/changepassword">שינוי סיסמא למערכת</a><br><br>
+                
                 <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=c7dabdfa68b08cb748092c7915c05a3f92c6d846'></script>
                <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/778346/t/2"></script>
                 <a href="#"></a><br>
@@ -122,6 +124,29 @@
         </footer>
       </div>
     </div>
+
+    <div id="popup1" class="overlay">
+      <div class="popup">
+        <h2>יצירת הודעות מתפרצות</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="contact-form">
+          <form action="/Staticov/AdminDash" method="POST" id="popup-form" autocomplete="off">
+            {% csrf_token %}
+          <p text-align="rtl">נא לרשום את ההודעה כאן:</p>
+          <div>
+            <fieldset>
+              <input type="text" name="popup-msg" rows="6" class="form-control" id="popup-msg" placeholder="...ההודעה"></textarea>
+            </fieldset>
+          </div>
+          <div class="col-lg-12">
+            <fieldset>
+              <button type="submit" id="popup-submit" class="main-button">שליחה</button>
+            </fieldset>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
     
     <!-- JavaScript files-->
     <script src="{%static 'admindesign/vendor/jquery/jquery.min.js' %}"></script>
@@ -132,5 +157,6 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="{%static 'admindesign/js/charts-home.js' %}"></script>
     <script src="{%static 'admindesign/js/front.js' %}"></script>
+    
   </body>
 </html>

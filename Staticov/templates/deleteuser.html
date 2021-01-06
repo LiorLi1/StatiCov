@@ -1,5 +1,13 @@
 {% load static %}
-<h2>עובדים ברשימת המתנה</h2>
+<button class="brk-btn" onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+<h2>מחיקת עובדים</h2>
 <div class="ripple-background">
   <div class="circle xxlarge shade1"></div>
   <div class="circle xlarge shade2"></div>
@@ -8,79 +16,60 @@
   <div class="circle small shade5"></div>
 </div>
 <div class="table-wrapper">
-    <table class="fl-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>שם</th>
-                <th>תעודת זהות</th>
-                <th>סיסמה</th>
-                <th>סוג משתמש</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in data %}
-                <tr>
-                    <td>{{item.id}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.taz}}</td>
-                    <td>{{item.password}}</td>
-                    <td>{{item.type}}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>    
-</div>
-
-
-  <div class="login-form">
-      <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
-      <div class="form-container">
-        <div class="form-heading">
-          הכנסת עובד למערכת
-        </div>
-        <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
-        <div class="form-element">
-          <form action="/Staticov/after_approuval_worker_insert" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
-              {% csrf_token %}
-              <label class="fa fa-user" for="taz"></label>
-              <input type="text" id="taz" name="taz" placeholder="...הזן תעודת זהות ">
-        </div>
-        <div class="form-element">
-          <label class="fa fa-lock" for="password"></label>
-          <input type="text" id="password" name="password" placeholder="...הזן סיסמא ">
-        </div> 
-        <div class="form-element">
-          <label class="fa fa-user" for="name"></label>
-          <input type="text" id="name" name="name" placeholder="...הזן שם">
-        </div> 
-        <div class="form-element">
-          <div class="input-block text-md-right">
-                  <label class="form-label" for="contact-symptom">הירשם\י בתור:</label>
-                  <div class="form-element">
-                      <select id="Type" name="Type" class="form-control required">
-                          <option selected></option>
-                          <option>עובד מדינה</option>
-                          <option>מנהל</option>
-                      </select>
-                  </div>
-              </div>
-        <div class="form-element">
-          <button id="login-submit">הכנס</button> 
-          {% if messages %}
-          {% for message in messages %}
-            <h3 style="color:rgb(128, 0, 0);">{{message}}</h3>
+  <table class="fl-table">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>שם</th>
+              <th>תעודת זהות</th>
+              <th>סיסמה</th>
+              <th>סוג משתמש</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for item in data %}
+              <tr>
+                  <td>{{item.id}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.taz}}</td>
+                  <td>{{item.password}}</td>
+                  <td>{{item.type}}</td>
+              </tr>
           {% endfor %}
-          {% endif %}  
-        </form>
+      </tbody>
+  </table>    
+</div>
+<br>
+<div class="login-form">
+    <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
+    <div class="form-container">
+      <div class="form-heading">
+        מחיקת עובד
       </div>
-  
+      <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
+      <div class="form-element">
+        <form action="/Staticov/Deleteworker" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
+            {% csrf_token %}
+            <label class="fa fa-user" for="taz"></label>
+            <input type="text" id="taz" name="taz" placeholder="...הזן תז">
+      </div>
+      <div class="form-element">
+        <label class="fa fa-lock" for="name"></label>
+        <input type="text" id="name" name="name" placeholder="...הזן שם העובד">
+      </div> 
+      <div class="form-element">
+        <button id="login-submit">מחק</button> 
+        {% if messages %}
+        {% for message in messages %}
+          <h3 style="color:rgb(128, 0, 0);">{{message}}</h3>
+        {% endfor %}
+        {% endif %}  
+      </form>
     </div>
-  
-    <style>
-
-  @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css";
-  @import "https://fonts.googleapis.com/css?family=Open+Sans:400,600|Raleway";
+  </div>
+</div>
+     
+  <style>
   @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
 
@@ -361,7 +350,9 @@ body{
         text-align: center;
     }
 }
-
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css";
+@import "https://fonts.googleapis.com/css?family=Open+Sans:400,600|Raleway";
+  
   * {
     margin:0px;
     padding:0px;
@@ -377,7 +368,7 @@ body{
     left:50%;
     transform:translate(-50%,-50%);
     width:350px;
-    height:680px;
+    height:600px;
     background:#f5f5f5;
     overflow:hidden;
     box-shadow:10px 6px 10px #555;
@@ -552,5 +543,61 @@ body{
       transform: scale(0.8);
     }
   }
+
+ .underlined-a {
+	 text-decoration: none;
+	 color: aqua;
+	 padding-bottom: 0.15em;
+	 box-sizing: border-box;
+	 box-shadow: inset 0 -0.2em 0 aqua;
+	 transition: 0.2s;
+}
+ .underlined-a:hover {
+	 color: #222;
+	 box-shadow: inset 0 -2em 0 aqua;
+	 transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+}
+ .brk-btn {
+	 position: relative;
+	 background: none;
+	 color: aqua;
+	 text-transform: uppercase;
+	 text-decoration: none;
+	 border: 0.2em solid aqua;
+	 padding: 0.5em 1em;
+}
+ .brk-btn::before {
+	 content: "";
+	 display: block;
+	 position: absolute;
+	 width: 10%;
+	 background: #222;
+	 height: 0.3em;
+	 right: 20%;
+	 top: -0.21em;
+	 transform: skewX(-45deg);
+	 -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+	 transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+}
+ .brk-btn::after {
+	 content: "";
+	 display: block;
+	 position: absolute;
+	 width: 10%;
+	 background: #222;
+	 height: 0.3em;
+	 left: 20%;
+	 bottom: -0.25em;
+	 transform: skewX(45deg);
+	 -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
+	 transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+}
+ .brk-btn:hover::before {
+	 right: 80%;
+}
+ .brk-btn:hover::after {
+	 left: 80%;
+}
+ 
   
 </style>

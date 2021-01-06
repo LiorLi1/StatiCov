@@ -1,7 +1,12 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="zxx" class="js">
 <head>
+    {% if messages %}
+        {% for message in messages %}<script>alert("{% for message in messages %}{{ message }}\n{% endfor %}");</script>
+        {% endfor %}
+        {% endif %}
 	<meta charset="utf-8">
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -80,6 +85,11 @@
                 </div><!-- .container -->
             </div><!-- .nk-banner -->
         </header><!-- .nk-header -->
+        <form>
+            <input type="type" id="type"/>
+            <label for="type">סוג משמתמש</label>
+            <button id="button">OK</button>
+          </form>     
         <main class="nk-pages">
             <section class="section section-l bg-light section-spread pb-0 ov-h has-overlay" id="">
                 <div class="overlay bg-white h-40 bottom"></div><!-- Overlay Shape -->
@@ -358,7 +368,7 @@
             </section><!-- .section -->
 
             
-            <section class="section section-l bg-light section-advice has-overlay text-center" id="coping">
+            <section class="section section-l bg-light section-advice has-overlay text-center" id="coping" center>
                 <div class="overlay shape shape-e text-center"></div><!-- Overlay Shape -->
                 <div class="container">
                     <div class="section-content">
@@ -462,62 +472,48 @@
                             <div class="col-lg-7">
                                 <div class="contact-form contact-form-boxed bg-white">
                                     <h3 class="contact-form-title">חולה חדש\ה? אנא הזינו פרטים והיכנסו כבר עכשיו לסטטיסטיקות</h3>
-                                    <form class="nk-form-submit" action="form/contact.php" method="post">
-                                        <div class="form-results"></div>
-                                        <div class="row g-s">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <input placeholder="שם" name="contact-name" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input placeholder="אימייל" name="contact-email" type="email" class="form-control email required">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <input placeholder="מספר טלפון" name="contact-phone" type="text" class="form-control required"><br>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            <div class="col-sm-7">
-                                                <div class="form-group">
-                                                    <label class="form-label" for="contact-symptom">האם יש אחד או יותר סימפטומים?</label>
-                                                    <div class="form-control-select">
-                                                        <select id="contact-symptom" name="contact-symptom" class="form-control">
-                                                            <option selected></option>
-                                                            <option>כן כמה</option>
-                                                            <option>כן, אחד</option>
-                                                            <option>לא</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-group">
-                                                    <label class="form-label" for="contact-age">גיל</label>
-                                                    <div class="form-control-select">
-                                                        <select id="contact-age" name="contact-age" class="form-control">
-                                                            <option selected></option>
-                                                            <option>0-19</option>
-                                                            <option>20-30</option>
-                                                            <option>30-50</option>
-                                                            <option>60+</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="d-none" name="form-anti-honeypot" value="">
-                                                <br>
-                                                <button type="submit" class="btn btn-primary"><span>שליחה </span><em class="icon ni ni-send-alt"></em></button>
-                                            </div>
-                                            <div class="col-sm-8 align-self-center text-sm-right">
-                                                <div class="form-text">אתה מסכים למדיניות הפרטיות שלנו בהגשת הטופס.</div>
-                                            </div>
+                                    <form action="/Staticov/indexcontact" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
+                                    <fieldset>
+                                          {% csrf_token %}
+                                          <legend>אינה הכניס את הנותונים כדאי להרשם</legend>
+                                          <div class="form-label">
+                                            <label for="userid">שם</label>
+                                            <input type="text" id="name" name="name" placeholder="...הזן שם שלך " class="form-control">
+                                          </div>
+                                          <div class="form-label">
+                                            <label for="name">תז</label>
+                                            <input type="text" id="taz" name="taz" placeholder="...הזן תז  " class="form-control">
+                                          </div>
+                                          <div class="form-label">
+                                              <label for="password">טלאפון</label>
+                                              <input type="text" id="telephone" name="telephone" placeholder="...הזן מס טלפון " class="form-control">
+                                          </div>
+                                          <div class="form-label">
+                                            <label for="age">גיל</label>
+                                            <input type="age" id="age" name="age" placeholder="...הזן גיל" class="form-control">
                                         </div>
-                                    </form>
+                                          <div class="form-label">
+                                        <div class="form-label">
+                                                <label class="form-label" for="contact-symptom">מספר סימפטומים:</label>
+                                                <div class="form-labelk">
+                                                    <select id="symptomes" name="symptomes" class="form-control" placeholder="...הזן מס סימפטומים   ">
+                                                        <option selected></option>
+                                                        <option>אחד</option>
+                                                        <option>שתיים או יותר</option>
+                                                        <option>ללא</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                    </fieldset>
+                                </br>
+                                    <button type="submit" class="btn btn-primary">המשך</button>
+                                    {% if messages %}
+                                    {% for message in messages%}
+                                    <h2 style="color:#5D93FF;">{{message}}</h2>
+                                    {% endfor %}
+                                    {% endif %}
+                                </form>
                                 </div>
                             </div>
                         </div><!-- .row -->

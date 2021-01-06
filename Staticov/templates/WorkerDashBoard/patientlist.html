@@ -1,5 +1,5 @@
 {% load static %}
-<h2>עובדים ברשימת המתנה</h2>
+<h2>חולים חדשים ברשימת המתנה</h2>
 <div class="ripple-background">
   <div class="circle xxlarge shade1"></div>
   <div class="circle xlarge shade2"></div>
@@ -8,79 +8,34 @@
   <div class="circle small shade5"></div>
 </div>
 <div class="table-wrapper">
-    <table class="fl-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>שם</th>
-                <th>תעודת זהות</th>
-                <th>סיסמה</th>
-                <th>סוג משתמש</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in data %}
-                <tr>
-                    <td>{{item.id}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.taz}}</td>
-                    <td>{{item.password}}</td>
-                    <td>{{item.type}}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>    
+  <table class="fl-table">
+      <thead>
+          <tr>
+              <th> שם החולה </th>
+              <th>מס טלאפון</th>
+              <th>ת"ז</th>
+              <th>מס סימפטומים</th>
+              <th>גיל</th>
+              <th>לטיפול עובד מס</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for item in data %}
+              <tr>
+                  <td>{{item.name}}</td>
+                  <td>{{item.telephone}}</td>
+                  <td>{{item.taz}}</td>
+                  <td>{{item.symptomes}}</td>
+                  <td>{{item.age}}</td>
+                  <td>{{item.workerid}}</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>    
 </div>
 
-
-  <div class="login-form">
-      <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
-      <div class="form-container">
-        <div class="form-heading">
-          הכנסת עובד למערכת
-        </div>
-        <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
-        <div class="form-element">
-          <form action="/Staticov/after_approuval_worker_insert" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
-              {% csrf_token %}
-              <label class="fa fa-user" for="taz"></label>
-              <input type="text" id="taz" name="taz" placeholder="...הזן תעודת זהות ">
-        </div>
-        <div class="form-element">
-          <label class="fa fa-lock" for="password"></label>
-          <input type="text" id="password" name="password" placeholder="...הזן סיסמא ">
-        </div> 
-        <div class="form-element">
-          <label class="fa fa-user" for="name"></label>
-          <input type="text" id="name" name="name" placeholder="...הזן שם">
-        </div> 
-        <div class="form-element">
-          <div class="input-block text-md-right">
-                  <label class="form-label" for="contact-symptom">הירשם\י בתור:</label>
-                  <div class="form-element">
-                      <select id="Type" name="Type" class="form-control required">
-                          <option selected></option>
-                          <option>עובד מדינה</option>
-                          <option>מנהל</option>
-                      </select>
-                  </div>
-              </div>
-        <div class="form-element">
-          <button id="login-submit">הכנס</button> 
-          {% if messages %}
-          {% for message in messages %}
-            <h3 style="color:rgb(128, 0, 0);">{{message}}</h3>
-          {% endfor %}
-          {% endif %}  
-        </form>
-      </div>
   
-    </div>
-  
-    <style>
-
-  @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css";
-  @import "https://fonts.googleapis.com/css?family=Open+Sans:400,600|Raleway";
+  <style>
   @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
 
@@ -361,7 +316,9 @@ body{
         text-align: center;
     }
 }
-
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css";
+@import "https://fonts.googleapis.com/css?family=Open+Sans:400,600|Raleway";
+  
   * {
     margin:0px;
     padding:0px;
@@ -377,7 +334,7 @@ body{
     left:50%;
     transform:translate(-50%,-50%);
     width:350px;
-    height:680px;
+    height:600px;
     background:#f5f5f5;
     overflow:hidden;
     box-shadow:10px 6px 10px #555;

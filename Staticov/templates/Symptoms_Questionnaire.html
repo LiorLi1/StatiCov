@@ -54,10 +54,9 @@
         <div class="form-element">
         <button id="login-submit">בדיקה</button> 
         {% if messages %}
-        {% for message in messages %}
-          <h3 style="color:rgb(128, 0, 0);">{{message}}</h3>
+        {% for message in messages %}<script>alert("{% for message in messages %}{{ message }}\n{% endfor %}");</script>
         {% endfor %}
-        {% endif %}  
+        {% endif %}
       </form>
     </div>
   </div>
@@ -81,7 +80,7 @@ body {
   left:50%;
   transform:translate(-50%,-50%);
   width:350px;
-  height:630px;
+  height:px;
   background:#f5f5f5;
   overflow:hidden;
   box-shadow:10px 6px 10px #555;
@@ -111,6 +110,7 @@ body {
   height:calc(100% - 180px);
   padding:0px 40px;
   text-align:center;
+  font-family:"Open Sans","Raleway",sans-serif; 
 }
 .form-container .form-element {
   position:relative;
@@ -151,7 +151,7 @@ body {
  }
 
 .form-container .form-element button {
-  width:100%;
+  width:80%;
   padding:12px;
   font-size:18px;
   border:none;

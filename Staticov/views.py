@@ -182,7 +182,7 @@ def CHANGE_PASSWORD(request):
                         return registration(request)
                 
     else:
-        messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
+        messages.error(request,'! הפרטים שהוזנו לא נמצאים במערכת')   
         return changepassword(request)
 
 

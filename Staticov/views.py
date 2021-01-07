@@ -430,6 +430,8 @@ def shift_offer(request):
         return WorkerDash(request)
     else:
         return index(request)
+
+
 def test(request):
     if request.method=='POST':
         starttest=request.POST.get('start')

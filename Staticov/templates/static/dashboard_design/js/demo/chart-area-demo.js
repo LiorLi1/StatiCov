@@ -3,7 +3,7 @@
 var CITY_INDEX = 3;
 var DATE_INDEX = 4;
 
-var COLORS = ["#3e95cd", "#8e5ea2", "#3cba9f"];
+var COLORS = ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#c45850"];
 var MONTHS = {
   "01": "ינואר",
   "02": "פברואר",

@@ -13,6 +13,7 @@
   <meta name="author" content="">
   <link href="{%static 'admindesign/img/logostaticov.png' %}" rel="icon">
   <title>StatiCov | DashBoard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
   <link href="{%static 'dashboard_design/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{%static 'dashboard_design/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
   <link href="{%static 'dashboard_design/css/ruang-admin.min.css' %}" rel="stylesheet">
@@ -284,24 +285,11 @@
               </div>
             </div>
             <!-- Line Chart graph-->
-            <div class="col-xl-4 col-lg-5 ">
+            <div class="col-xl-4 col-lg-2">
               <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">חודשים אחרונים</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button" id="dropdownMenuLink"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      חודש <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                      aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Select Periode</div>
-                      <a class="dropdown-item" href="#">Today</a>
-                      <a class="dropdown-item" href="#">Week</a>
-                      <a class="dropdown-item active" href="#">Month</a>
-                      <a class="dropdown-item" href="#">This Year</a>
-                    </div>
-                  </div>
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="height: 150px;">
+                  <h6 class="m-0 font-weight-bold text-primary">ערים בישראל - תחלואה גבוהה</h6>
+                  <img src="{%static 'dashboard_design/img/placeholder.png' %}" style="width: 60x; height: 60px;">
                 </div>
                 <div class="card-body">
                   <div class="mb-3">
@@ -309,7 +297,15 @@
                       <div class="small float-right"><b>4,492 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      <div class="progress-bar progress-bar-striped active bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:80%"></div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="small text-gray-500">בני ברק
+                      <div class="small float-right"><b>4,492 </b></div>
+                    </div>
+                    <div class="progress" style="height: 12px;">
+                      <div class="progress-bar progress-bar-striped active bg-danger" role="progressbar" style="width: 80%" aria-valuenow="80"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
@@ -318,7 +314,7 @@
                       <div class="small float-right"><b>786 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 70%" aria-valuenow="70"
+                      <div class="progress-bar progress-bar-striped active bg-danger" role="progressbar" style="width: 70%" aria-valuenow="70"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
@@ -327,32 +323,28 @@
                       <div class="small float-right"><b>730 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 55%" aria-valuenow="55"
+                      <div class="progress-bar progress-bar-striped active bg-danger" role="progressbar" style="width: 55%" aria-valuenow="55"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="mb-3">
-                    <div class="small text-gray-500">פתח תקווה
+                    <div class="small text-gray-500">אשדוד
                       <div class="small float-right"><b>578 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50"
+                      <div class="progress-bar progress-bar-striped active bg-success" role="progressbar" style="width: 50%" aria-valuenow="50"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="mb-3">
-                    <div class="small text-gray-500">בני ברק
+                    <div class="small text-gray-500">מודיעין עילית
                       <div class="small float-right"><b>547 </b></div>
                     </div>
                     <div class="progress" style="height: 12px;">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="30"
+                      <div class="progress-bar progress-bar-striped active bg-success" role="progressbar" style="width: 30%" aria-valuenow="30"
                         aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
-                </div>
-                <div class="card-footer text-center">
-                  <a class="m-0 small text-primary card-link" href="#">לצפייה בכל הערים <i
-                      class="fas fa-chevron-right"></i></a>
                 </div>
               </div>
             </div>

@@ -1,4 +1,7 @@
 {% load static %}
+<html> 
+  
+<html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +20,7 @@
   <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}" type="text/javascript"></script>
   <script src="{%static 'dashboard_design/js/demo/chart-pie-demo.js' %}" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+ 
 
 </head>
 
@@ -63,6 +67,11 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <!-- TopBar -->
+        <form class="form-control mr-sm-1">
+          {% for item in data %}
+            <marquee direction="right" bgcolor="white" width="600">{{item.popupmsg}}</marquee>
+          {% endfor %}
+        </form>
         <nav class="navbar navbar-expand flex-row navbar-light bg-navbar topbar mb-4 static-top">
           <ul class="navbar-nav ml-auto">
           </ul>
@@ -170,7 +179,7 @@
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="line-chart" width="600" height="250" style="margin:10px;"></canvas>
+                    <canvas id="line-chart" width="600" height="200" style="margin:10px;"></canvas>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
                   </div>
@@ -198,9 +207,10 @@
                 </div>
                 <div class="card-body">
                   <div class="chart-pie">
-                    <canvas id="doughnut-chart" width="950" height="700" style="margin:10px;"></canvas>
+                    <canvas id="doughnut-chart" width="1000" height="600" ></canvas>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+                    
                   </div>
                 </div>
               </div>
@@ -372,7 +382,7 @@
   <script src="{%static 'dashboard_design/js/demo/chart-area-demo.js' %}"></script>  
   <script src="{%static 'dashboard_design/js/demo/chart-pie-demo.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
+  <link rel="stylesheet" href="{% static 'admindesign/css/custom.css' %}">
 </body>
 
 </html>

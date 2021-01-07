@@ -18,8 +18,8 @@ class worker_register(models.Model):
 
 class AdminModel(models.Model):
     ID=models.IntegerField(db_column='ID',primary_key=True)
-    name=models.TextField(db_column='Name')
-    taz=models.CharField(db_column='TAZ',max_length=9)
+    name=models.TextField(db_column='name')
+    taz=models.CharField(db_column='taz',max_length=9)
     password=models.TextField(db_column='Password')
     class Meta:
         managed = False
@@ -27,9 +27,9 @@ class AdminModel(models.Model):
 
 class WorkersModel(models.Model):
     ID=models.IntegerField(db_column='ID',primary_key=True)
-    name=models.TextField(db_column='Name')
-    taz=models.CharField(db_column='TAZ',max_length=9)
-    password=models.TextField(db_column='Password')
+    name=models.TextField(db_column='name')
+    taz=models.CharField(db_column='taz',max_length=9)
+    password=models.TextField(db_column='password')
     Type=models.TextField(db_column='type')
     class Meta:
         managed = False
@@ -37,13 +37,13 @@ class WorkersModel(models.Model):
 
 class CivilianModel(models.Model):
     ID=models.IntegerField(db_column='ID',primary_key=True)
-    taz=models.CharField(db_column='TAZ',max_length=9)
-    age=models.IntegerField(db_column='AGE')
-    place=models.TextField(db_column='Place')
-    date=models.DateField(db_column='DATE')
-    religion=models.TextField(db_column='Religion')
+    taz=models.CharField(db_column='taz',max_length=9)
+    age=models.IntegerField(db_column='age')
+    place=models.TextField(db_column='place')
+    date=models.DateField(db_column='date')
+    religion=models.TextField(db_column='religion')
     class Meta:
-        managed = True
+        managed = False
         db_table = 'formcivilian'
 
 class IndexFormModel(models.Model):
@@ -90,5 +90,21 @@ class SymptomesFormModel(models.Model):
         db_table = 'symptomesform'
 
 
+class Popup(models.Model):
+    mid = models.AutoField(db_column='MID', primary_key=True)  # Field name made lowercase.
+    popupmsg = models.TextField(db_column='popupmsg')
 
+    class Meta:
+        managed = False
+        db_table = 'popup'
 
+class Shiftregister(models.Model):
+    ID = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    start = models.DateField(db_column='start')
+    end = models.DateField(db_column='end')
+    workerid = models.IntegerField(db_column='workerid')
+    confirmed = models.TextField(db_column='confirmed')
+
+    class Meta:
+        managed = False
+        db_table = 'shiftregister'

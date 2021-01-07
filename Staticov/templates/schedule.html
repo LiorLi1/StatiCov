@@ -1,18 +1,11 @@
 <!DOCTYPE html>
-<button class="brk-btn" onclick="goBack()">Go Back</button>
-
-<script>
-function goBack() {
-  window.history.back();
-}
-</script>
 <html lang="he">
 {% load static %}  
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
   <link href="{%static '/images/logostaticov.png' %}" rel="icon">
-  <title>החלפת סיסמה</title>
+  <title>הגשת הצעת משמרת</title>
 </head>
 <div class="ripple-background">
   <div class="circle xxlarge shade1"></div>
@@ -21,29 +14,31 @@ function goBack() {
   <div class="circle mediun shade4"></div>
   <div class="circle small shade5"></div>
 </div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <div class="login-form">
     <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
     <div class="form-container">
       <div class="form-heading">
-        החלפת סיסמא
+        הגשת הצעת משמרת
       </div>
       <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
       <div class="form-element">
-        <form action="/Staticov/change_password" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
+        <form action="/Staticov/shift_offer" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
             {% csrf_token %}
             <label class="fa fa-user" for="taz"></label>
-            <input type="text" id="taz" name="taz" placeholder="...הזן תז">
+            <input type="date" id="start" name="start" placeholder="בחר תאריך ושעת התחלה">
+
       </div>
       <div class="form-element">
         <label class="fa fa-lock" for="password"></label>
-        <input type="text" id="current_password" name="current_password" placeholder="...הזן סיסמא נוכחית">
+        <input type="date" id="end" name="end" placeholder="בחר תאריך ושעת סיום">
       </div> 
       <div class="form-element">
         <label class="fa fa-lock" for="password"></label>
-        <input type="text" id="password" name="password" placeholder="...הזן סיסמא חדשה">
+        <input type="text" id="workerid" name="workerid" placeholder="הזן מס' זיהוי עובד">
       </div> 
       <div class="form-element">
-        <button id="login-submit">החלף</button> 
+        <button id="login-submit">אשר</button> 
         {% if messages %}
         {% for message in messages %}
           <h3 style="color:rgb(128, 0, 0);">{{message}}</h3>

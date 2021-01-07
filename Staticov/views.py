@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-from Staticov.models import AdminModel
 from Staticov.models import CivilianModel
 from Staticov.models import IndexFormModel
 from Staticov.models import RegisterFormModel
 from Staticov.models import WorkersModel
-from Staticov.models import SymptomesFormModel
+from Staticov.models import Shiftregister
 from django.contrib import messages
+from Staticov.models import Popup
 import mysql.connector
 # Create your views here.
 
@@ -38,7 +38,9 @@ def contact(request):
     return render(request,'AdminDashBoard/contact.html')
 # MAINDASHBOARD WITH ALL STATISTICS
 def MainDashBoard(request):
-    return render(request,'MainDashBoard/dashboardindex.html')
+    return render('MainDashBoard/dashboardindex.html')
+def offer_shifts(request):
+    return render(request,'schedule.html')
 #--------------------------------------------------------------------#   
 def registration(request):
     #regular registration before 
@@ -53,8 +55,7 @@ def changepassword(request):
     return render(request, 'changepassword.html')
 def check_symptomes(request):
     return render(request,'Symptoms_Questionnaire.html')
-def workerdelete(request):
-    return render(request,'deleteuser.html')
+
 
 #----------------------------USERS FUNCTIONS (REGISTRATIONS, ADD ,SUPP ) ! ---------------------------#
 
@@ -79,10 +80,17 @@ def after_approuval_worker_insert(request):
         saverecord.password=request.POST.get('password')
         saverecord.Type=request.POST.get('Type')
         saverecord.save()
-        messages.success(request,'הנתונים נשמרו בהצלחה!')
-        return index(request)
+        cursor.execute("SELECT * FROM `registerform`")
+        data = cursor.fetchall()    
+        for item in data:
+            ID,name,taz,password,Type = item
+            if saverecord.taz==taz:
+                cursor.execute("DELETE FROM `registerform` WHERE `registerform`.`ID` = '%s';"%(ID))
+                db_connection.commit()
+                messages.success(request,'הנתונים נשמרו בהצלחה!')
+                return get_new_workers_table(request)          
     else:
-        return index(request)
+        return get_new_workers_table(request)
 
 def get_new_workers_table(request):
     result={
@@ -102,6 +110,23 @@ def get_new_workers_table(request):
         print(result)
     return render(request,'AdminDashBoard/addworker.html', result)
 
+def get_workers_table(request):
+    result={
+        'data': []
+    }
+    cursor.execute("SELECT * FROM workers")
+    data = cursor.fetchall()
+    for item in data:
+        ID,name,taz,password,type = item
+        result['data'].append({
+            'id':ID,
+            'name':name,
+            'taz':taz,
+            'password':password,
+            'type':type,
+        })
+        print(result)
+    return render(request,'deleteuser.html', result)
 
 def login(request):
     result = []
@@ -122,7 +147,6 @@ def login(request):
         ID,name,taz,password,type = item
         if useridtest==taz and passwordtest == password and type == 'אזרח':
              return index(request) 
-
     else :
         messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
         return registration(request) 
@@ -140,16 +164,25 @@ def CHANGE_PASSWORD(request):
             if taz==useridtest and password == passwordcurrentpassword :
                 cursor.execute("UPDATE `workers` SET `password` = '%s' WHERE `workers`.`ID` = '%s';"%(passwordtest,ID))
                 db_connection.commit()
-        cursor.execute("SELECT * FROM registerform")
-        data = cursor.fetchall()    
-        for item in data:
-            ID,name,taz,password,type = item
-            if taz==useridtest and password == passwordcurrentpassword :
-                cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
-                db_connection.commit()
-                return index(request)
+                cursor.execute("SELECT * FROM registerform")
+                data = cursor.fetchall()    
+                for item in data:
+                    ID,name,taz,password,type = item
+                    if taz==useridtest and password == passwordcurrentpassword :
+                        cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
+                        db_connection.commit()
+                        return registration(request)
+            cursor.execute("SELECT * FROM registerform")
+            data = cursor.fetchall()    
+            for item in data:
+                    ID,name,taz,password,type = item
+                    if taz==useridtest and password == passwordcurrentpassword :
+                        cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
+                        db_connection.commit()
+                        return registration(request)
+                
     else:
-        messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
+        messages.error(request,'! הפרטים שהוזנו לא נמצאים במערכת')   
         return changepassword(request)
 
 
@@ -162,11 +195,11 @@ def Deleteworker(request):
         data = cursor.fetchall()    
         for item in data:
             ID,name,taz,password,type = item
-            if taz==useridtest and name == workername :
-                cursor.execute("DELETE FROM `worker` WHERE `workers`.`ID` = '%s';"%(ID))
+            if taz==useridworker and name == workername :
+                cursor.execute("DELETE FROM `workers` WHERE `workers`.`ID` = '%s';"%(ID))
                 db_connection.commit()
                 messages.success(request,'עובד נמחק מהמערכת ')
-                return index(request)
+                return get_workers_table(request)
     else: messages.success(request,'עובד לא נמצא במערכת ')
     return index(request)
 #-----------------------------------PATIENT FUNCTIONS ! -------------------#
@@ -193,6 +226,22 @@ def get_new_positiv_table(request):
         print(result)
     return render(request,'AdminDashBoard/patienttoworker.html', result)
 
+def get_Main_dashboard(request):
+    result={
+        'data': []
+    }
+    cursor.execute("SELECT * FROM popup")
+    data = cursor.fetchall()
+    for item in data:
+        MID,popupmsg= item
+        result['data'].append({
+            'MID':MID,
+            'popupmsg':	popupmsg,
+        })
+        print(result)
+    return render(request,'MainDashBoard/dashboardindex.html', result)
+
+popupmessagetext = Popup.objects.all()
 #==========function for worker list of patient worker assigned----------------------#
 
 def get_new_patient_table(request):
@@ -308,7 +357,6 @@ def addpatient(request):
             return add_patient(request)
 
 
-
 def symptomesformcheck(request):
     if request.method=='POST':
          headtest=request.POST.get('head')
@@ -334,7 +382,69 @@ def symptomesformcheck(request):
          return index(request)
 
 
+#=================POPUP================#
 
 
+def CHANGE_MESSAGE_POPUP(request):
+    if request.method=='POST':
+        msgpp=request.POST.get('popup-msg')
+        result = []
+        cursor.execute("SELECT * FROM `popup`")
+        data = cursor.fetchall()    
+        for item in data:
+            MID,popupmsg = item
+            cursor.execute("UPDATE `popup` SET `popupmsg` = '%s' WHERE `popup`.`MID` = '%s';"%(msgpp,1))
+            db_connection.commit()
+        return AdminDash(request)
+    else:  
+        return AdminDash(request)
 
+#==================SCHEDULE=========================#
 
+def shift_offers(request):
+    result={
+        'data': []
+    }
+    cursor.execute("SELECT * FROM shiftregister")
+    data = cursor.fetchall()
+    for item in data:
+        ID,start,end,workerid,confirmed = item
+        result['data'].append({
+            'id':ID,
+            'start':start,
+            'end':end,
+            'workerid':workerid,
+            'confirmed':confirmed
+        })
+        print(result)
+    return render(request,'schedule2.html', result)
+
+def shift_offer(request):
+    if request.method=='POST':
+        saverecord=Shiftregister()
+        saverecord.start=request.POST.get('start')
+        saverecord.end=request.POST.get('end')
+        saverecord.workerid=request.POST.get('workerid')
+        saverecord.confirmed='ממתין לאישור'
+        saverecord.save()
+        return WorkerDash(request)
+    else:
+        return index(request)
+def test(request):
+    if request.method=='POST':
+        starttest=request.POST.get('start')
+        endtest=request.POST.get('end')
+        currentworkerid=request.POST.get('workerid')
+        isconfirmed=request.POST.get('confirmed')
+        cursor.execute("SELECT * FROM shiftregister")
+        data = cursor.fetchall()
+        for item in data:
+                ID,start,end,workerid,confirmed = item
+                if start == starttest and end == endtest and isconfirmed == 'אשר' and currentworkerid == workerid:
+                    print(isconfirmed)
+                    print(starttest)
+                    print(item)
+                    cursor.execute("UPDATE `shiftregister` SET `confirmed` = '%s' WHERE `shiftregister`.`ID` = '%s';"%('isconfirmed',ID))
+                    db_connection.commit()
+                    return AdminDash(request)
+            

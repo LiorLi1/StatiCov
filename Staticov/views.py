@@ -66,6 +66,7 @@ def registration_before_admin_approval(request):
         saverecord.name=request.POST.get('name')
         saverecord.password=request.POST.get('password')
         saverecord.Type=request.POST.get('Type')
+        saverecord.civiliantype=request.POST.get('civiliantype')
         saverecord.save()
         messages.success(request,'הנתונים נשמרו בהצלחה!')
         return registration(request)
@@ -83,7 +84,7 @@ def after_approuval_worker_insert(request):
         cursor.execute("SELECT * FROM `registerform`")
         data = cursor.fetchall()    
         for item in data:
-            ID,name,taz,password,Type = item
+            ID,name,taz,password,Type,civiliantype = item
             if saverecord.taz==taz:
                 cursor.execute("DELETE FROM `registerform` WHERE `registerform`.`ID` = '%s';"%(ID))
                 db_connection.commit()
@@ -99,8 +100,9 @@ def get_new_workers_table(request):
     cursor.execute("SELECT * FROM registerform")
     data = cursor.fetchall()
     for item in data:
-        ID,name,taz,password,type = item
-        result['data'].append({
+        ID,name,taz,password,type,civiliantype = item
+        if type == 'מנהל' or type == 'עובד מדינה':
+         result['data'].append({
             'id':ID,
             'name':name,
             'taz':taz,
@@ -128,6 +130,43 @@ def get_workers_table(request):
         print(result)
     return render(request,'deleteuser.html', result)
 
+def get_civilian_table(request):
+    result={
+        'data': [],
+        'counter': []
+    }
+    studentcount=0
+    doctorcount=0
+    scientificcount=0
+    normal=0
+    cursor.execute("SELECT * FROM registerform")
+    data = cursor.fetchall()
+    for item in data:
+        ID,name,taz,password,type,civiliantype = item
+        if civiliantype == 'סטודנט':
+            studentcount += 1
+        elif civiliantype == 'רופא':
+            doctorcount += 1
+        elif civiliantype == 'מדעי':
+            scientificcount += 1
+        elif civiliantype == 'רגיל':
+            normal += 1
+        if type == 'אזרח':
+                result['data'].append({
+                    'name':name,
+                    'taz':taz,
+                    'civiliantype':civiliantype,
+                })
+    print(result)
+    result['counter'].append({
+            'studentcount':studentcount,
+            'doctorcount':doctorcount,
+            'scientificcount':scientificcount,
+            'normal':normal,
+        })
+        
+    return render(request,'civilianlist.html', result)
+
 def login(request):
     result = []
     cursor.execute("SELECT * FROM workers")
@@ -136,7 +175,7 @@ def login(request):
          useridtest=request.POST.get('taz')
          passwordtest=request.POST.get('password')
     for item in data:
-        ID,name,taz,password,type = item
+        ID,name,taz,password,type,civiliantype= item
         if useridtest==taz and passwordtest == password and type == 'מנהל':
              return AdminDash(request)
         elif useridtest==taz and passwordtest == password and type == 'עובד מדינה':
@@ -144,7 +183,7 @@ def login(request):
     cursor.execute("SELECT * FROM registerform")
     data = cursor.fetchall()
     for item in data:
-        ID,name,taz,password,type = item
+        ID,name,taz,password,type,civiliantype = item
         if useridtest==taz and passwordtest == password and type == 'אזרח':
              return index(request) 
     else :
@@ -168,7 +207,7 @@ def CHANGE_PASSWORD(request):
         cursor.execute("SELECT * FROM registerform")
         data = cursor.fetchall()    
         for item in data:
-            ID,name,taz,password,type = item
+            ID,name,taz,password,type,civiliantype = item
             if taz==useridtest and password == passwordcurrentpassword and type == 'אזרח':
                 cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
                 db_connection.commit()

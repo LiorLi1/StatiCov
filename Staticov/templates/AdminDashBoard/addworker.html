@@ -11,21 +11,21 @@
     <table class="fl-table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>שם</th>
                 <th>תעודת זהות</th>
                 <th>סיסמה</th>
                 <th>סוג משתמש</th>
+                <th>סטטוס</th>
             </tr>
         </thead>
         <tbody>
             {% for item in data %}
                 <tr>
-                    <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.taz}}</td>
                     <td>{{item.password}}</td>
                     <td>{{item.type}}</td>
+                    <td>ממתין לאישור</td>
                 </tr>
             {% endfor %}
         </tbody>

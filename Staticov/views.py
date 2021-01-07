@@ -161,25 +161,18 @@ def CHANGE_PASSWORD(request):
         data = cursor.fetchall()    
         for item in data:
             ID,name,taz,password,type = item
-            if taz==useridtest and password == passwordcurrentpassword :
+            if taz==useridtest and password == passwordcurrentpassword and (type == 'מנהל' or type == 'עובד מדינה'):
                 cursor.execute("UPDATE `workers` SET `password` = '%s' WHERE `workers`.`ID` = '%s';"%(passwordtest,ID))
                 db_connection.commit()
-                cursor.execute("SELECT * FROM registerform")
-                data = cursor.fetchall()    
-                for item in data:
-                    ID,name,taz,password,type = item
-                    if taz==useridtest and password == passwordcurrentpassword :
-                        cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
-                        db_connection.commit()
-                        return registration(request)
-            cursor.execute("SELECT * FROM registerform")
-            data = cursor.fetchall()    
-            for item in data:
-                    ID,name,taz,password,type = item
-                    if taz==useridtest and password == passwordcurrentpassword :
-                        cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
-                        db_connection.commit()
-                        return registration(request)
+                return registration(request)       
+        cursor.execute("SELECT * FROM registerform")
+        data = cursor.fetchall()    
+        for item in data:
+            ID,name,taz,password,type = item
+            if taz==useridtest and password == passwordcurrentpassword and type == 'אזרח':
+                cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
+                db_connection.commit()
+                return registration(request)
                 
     else:
         messages.error(request,'! הפרטים שהוזנו לא נמצאים במערכת')   

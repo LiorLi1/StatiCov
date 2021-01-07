@@ -65,6 +65,8 @@ class RegisterFormModel(models.Model):
     taz=models.CharField(db_column='taz',max_length=9)
     password=models.TextField(db_column='password')
     Type=models.TextField(db_column='type')
+    civiliantype=models.TextField(db_column='civiliantype')
+    
     class Meta:
         managed = False
         db_table = 'registerform'
@@ -98,13 +100,13 @@ class Popup(models.Model):
         managed = False
         db_table = 'popup'
 
-class Shiftregister(models.Model):
+class emploiedutemp(models.Model):
     ID = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    start = models.DateField(db_column='start')
-    end = models.DateField(db_column='end')
-    workerid = models.IntegerField(db_column='workerid')
-    confirmed = models.TextField(db_column='confirmed')
+    startdate = models.TextField(db_column='startdate')
+    enddate = models.TextField(db_column='enddate')
+    workerid = models.CharField(db_column='workerid',max_length=9)
+    confirmation = models.TextField(db_column='confirmation')
 
     class Meta:
         managed = False
-        db_table = 'shiftregister'
+        db_table = 'emploiedutemp'

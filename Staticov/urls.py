@@ -35,6 +35,7 @@ urlpatterns = [
     path('offer_shifts',views.offer_shifts),
     path('shift_offer',views.shift_offer),
     path('shift_offers',views.shift_offers),
-    path('confirmdate',views.test)
-     
+    path('confirm_shift',views.confirm_shift),
+    path('workerschedule',views.workerschedule) 
+
 ]

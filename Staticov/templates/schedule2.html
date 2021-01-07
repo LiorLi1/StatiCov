@@ -15,7 +15,6 @@
                 <th>שעת התחלה</th>
                 <th>שעת סיום</th>
                 <th>מס' זיהוי עובד</th>
-                <th>confirmation</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +24,7 @@
                     <td>{{item.start}}</td>
                     <td>{{item.end}}</td>
                     <td>{{item.workerid}}</td>
-                    <td>{{item.confirmed}}</td>
+                    <td>{{item.confirmation}}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -46,22 +45,32 @@
         </div>
         <img src="{% static 'images/logostaticov.png' %}" width="75" height="77" id="icon" alt="User Icon"/>
         <div class="form-element">
-          <form action="/Staticov/confirmdate" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
-          {% csrf_token %}
+          <form action="/Staticov/confirm_shift" method="POST" id="login-form" class="form form-login" autocomplete="off" role="main">
+              {% csrf_token %}
               <label class="fa fa-user" for="start"></label>
-              <input type="date" id="start" name="start" placeholder="...קבע התחלת משמרת ">
+              <input type="text" id="datetimepicker" name="start" placeholder="...קבע התחלת משמרת ">
+              <script>
+                $(function () {
+                  $("#datetimepicker").datetimepicker();
+                });
+              </script>
         </div>
         <div class="form-element">
           <label class="fa fa-lock" for="end"></label>
-          <input type="date" id="end" name="end" placeholder="...קבע סיום משמרת ">
+          <input type="text" id="datetimepicker2" name="end" placeholder="...קבע סיום משמרת ">
+          <script>
+            $(function () {
+              $("#datetimepicker2").datetimepicker();
+            });
+          </script>
         </div> 
         <div class="form-element">
           <label class="fa fa-user" for="workerid"></label>
           <input type="text" id="workerid" name="workerid" placeholder="...הזן מס' זיהוי עובד">
         </div> 
         <div class="form-element">
-          <label class="fa fa-user" for="confirmed"></label>
-          <input type="text" list="subject" id="confirmed" name="confirmed" placeholder="...אשר או דחה">
+          <label class="fa fa-user" for="confirmation"></label>
+          <input type="text" list="subject" id="confirmation" name="confirmation" placeholder="...אשר או דחה">
             <datalist id=subject>
               <option>אשר</option>
               <option>דחה</option>

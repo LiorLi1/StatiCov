@@ -5,7 +5,7 @@ from Staticov.models import CivilianModel
 from Staticov.models import IndexFormModel
 from Staticov.models import RegisterFormModel
 from Staticov.models import WorkersModel
-from Staticov.models import Shiftregister
+from Staticov.models import emploiedutemp
 from django.contrib import messages
 from Staticov.models import Popup
 import mysql.connector
@@ -405,46 +405,70 @@ def shift_offers(request):
     result={
         'data': []
     }
-    cursor.execute("SELECT * FROM shiftregister")
+    cursor.execute("SELECT * FROM emploiedutemp")
     data = cursor.fetchall()
     for item in data:
-        ID,start,end,workerid,confirmed = item
+        ID,start,end,workerid,confirmation = item
         result['data'].append({
             'id':ID,
             'start':start,
             'end':end,
             'workerid':workerid,
-            'confirmed':confirmed
+            'confirmation':confirmation
         })
         print(result)
     return render(request,'schedule2.html', result)
 
+def workerschedule(request):
+    result={
+        'data': []
+    }
+    cursor.execute("SELECT * FROM emploiedutemp")
+    data = cursor.fetchall()
+    for item in data:
+        ID,start,end,workerid,confirmation = item
+        result['data'].append({
+            'id':ID,
+            'start':start,
+            'end':end,
+            'workerid':workerid,
+            'confirmation':confirmation
+        })
+        print(result)
+    return render(request,'workerschedule.html', result)
+
 def shift_offer(request):
     if request.method=='POST':
-        saverecord=Shiftregister()
-        saverecord.start=request.POST.get('start')
-        saverecord.end=request.POST.get('end')
+        saverecord=emploiedutemp()
+        saverecord.startdate=request.POST.get('start')
+        saverecord.enddate=request.POST.get('end')
         saverecord.workerid=request.POST.get('workerid')
-        saverecord.confirmed='ממתין לאישור'
+        saverecord.confirmation='ממתין לאישור'
         saverecord.save()
         return WorkerDash(request)
     else:
         return index(request)
-def test(request):
+
+
+def confirm_shift(request):
     if request.method=='POST':
         starttest=request.POST.get('start')
         endtest=request.POST.get('end')
         currentworkerid=request.POST.get('workerid')
-        isconfirmed=request.POST.get('confirmed')
-        cursor.execute("SELECT * FROM shiftregister")
-        data = cursor.fetchall()
-        for item in data:
-                ID,start,end,workerid,confirmed = item
-                if start == starttest and end == endtest and isconfirmed == 'אשר' and currentworkerid == workerid:
-                    print(isconfirmed)
-                    print(starttest)
-                    print(item)
-                    cursor.execute("UPDATE `shiftregister` SET `confirmed` = '%s' WHERE `shiftregister`.`ID` = '%s';"%('isconfirmed',ID))
+        confirmed=request.POST.get('confirmation')
+    result = []
+    cursor.execute("SELECT * FROM `emploiedutemp`")
+    data = cursor.fetchall()    
+    for item in data:
+            ID,startdate,enddate,workerid,confirmation = item
+            if startdate==starttest and enddate == endtest and workerid == currentworkerid and confirmed=='אשר':
+                cursor.execute("UPDATE `emploiedutemp` SET `confirmation` = '%s' WHERE `emploiedutemp`.`ID` = '%s';"%(confirmed,ID))
+                db_connection.commit()
+                return AdminDash(request)
+            elif startdate==starttest and enddate == endtest and workerid == currentworkerid and confirmed=='דחה':
+                    cursor.execute("DELETE FROM `emploiedutemp` WHERE `emploiedutemp`.`ID` = '%s';"%(ID))
                     db_connection.commit()
                     return AdminDash(request)
-            
+    else:
+            messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
+            return AdminDash(request)

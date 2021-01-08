@@ -32,6 +32,17 @@ class workerstest(TestCase):
        print("HERRE")
        self.assertEqual(record,item)
 
+    def test_workersslug(self):
+       item=WorkersModel()
+       item.ID=1
+       item.name='jean'
+       item.taz='123456789'
+       item.password='123456'
+       item.Type='admin'
+       item.save()
+
+       self.assertEqual(item.name, 'jean')
+
 class registertest(TestCase):
 
     def test_register(self):
@@ -46,6 +57,17 @@ class registertest(TestCase):
        record= RegisterFormModel.objects.get()
        print("HERRE")
        self.assertEqual(record,item)
+
+    def test_registrationslug(self):
+       item=RegisterFormModel()
+       item.ID=1
+       item.name='jean'
+       item.taz='123456789'
+       item.password='123456'
+       item.Type='admin'
+       item.civiliantype='student'
+       item.save()
+       self.assertNotEquals(item.civiliantype, 'jean')
 
 class Patient(TestCase):
 

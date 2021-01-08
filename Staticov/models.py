@@ -93,11 +93,11 @@ class SymptomesFormModel(models.Model):
 
 
 class Popup(models.Model):
-    mid = models.AutoField(db_column='MID', primary_key=True)  # Field name made lowercase.
+    mid = models.IntegerField(db_column='MID', primary_key=True)  # Field name made lowercase.
     popupmsg = models.TextField(db_column='popupmsg')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'popup'
 
 class emploiedutemp(models.Model):

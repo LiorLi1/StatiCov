@@ -1,4 +1,5 @@
 from django import urls
+from django.db.models.fields import AutoField
 from django.test import TestCase,SimpleTestCase
 from django.urls import resolve, reverse
 from Staticov.views import *
@@ -81,5 +82,15 @@ class Patient(TestCase):
        record= Patientworker.objects.get()
        print("HERRE")
        self.assertEqual(record,item)
+
+class Popup_test(TestCase):
+
+    def test_Popup(self):
+        item=Popup()
+        item.mid=1
+        item.popupmsg="TESTINGHERE"
+        item.save()
+        record = Popup.objects.get()
+        self.assertEqual(item,record)
 
 # Create your tests here.

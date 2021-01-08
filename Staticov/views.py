@@ -175,7 +175,7 @@ def login(request):
          useridtest=request.POST.get('taz')
          passwordtest=request.POST.get('password')
     for item in data:
-        ID,name,taz,password,type,civiliantype= item
+        ID,name,taz,password,type= item
         if useridtest==taz and passwordtest == password and type == 'מנהל':
              return AdminDash(request)
         elif useridtest==taz and passwordtest == password and type == 'עובד מדינה':

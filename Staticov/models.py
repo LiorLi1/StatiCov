@@ -32,7 +32,7 @@ class WorkersModel(models.Model):
     password=models.TextField(db_column='password')
     Type=models.TextField(db_column='type')
     class Meta:
-        managed = False
+        managed = True
         db_table = 'workers'
 
 class CivilianModel(models.Model):
@@ -68,17 +68,17 @@ class RegisterFormModel(models.Model):
     civiliantype=models.TextField(db_column='civiliantype')
     
     class Meta:
-        managed = False
+        managed = True
         db_table = 'registerform'
 
 class Patientworker(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     telephone = models.CharField(max_length=11)
     taz = models.CharField(max_length=9)
-    workerid = models.IntegerField()
+    workerid = models.IntegerField(db_column='workerid')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'patientworker'
 
 class SymptomesFormModel(models.Model):

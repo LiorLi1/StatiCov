@@ -4,6 +4,7 @@ from django.test import TestCase,SimpleTestCase
 from django.urls import resolve, reverse
 from Staticov.views import *
 from Staticov.models import *
+import unittest
 
 
 
@@ -92,5 +93,8 @@ class Popup_test(TestCase):
         item.save()
         record = Popup.objects.get()
         self.assertEqual(item,record)
+
+
+
 
 # Create your tests here.

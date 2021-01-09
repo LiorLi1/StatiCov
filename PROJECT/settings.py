@@ -135,6 +135,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    '/Users/shira/Documents/GitHub/STATICOV/StatiCov/Staticov/templates/static',
     '/Users/kevyn/GitHub/STATICOV/StatiCov/Staticov/templates/static',
 ]
 STATICFILES_FINDERS = [

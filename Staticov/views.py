@@ -68,8 +68,14 @@ def registration_before_admin_approval(request):
         saverecord.Type=request.POST.get('Type')
         saverecord.civiliantype=request.POST.get('civiliantype')
         saverecord.save()
-        messages.success(request,'הנתונים נשמרו בהצלחה!')
-        return registration(request)
+        if saverecord.Type == 'אזרח':
+            messages.success(request,'הנתונים נשמרו בהצלחה!')
+            return index(request)
+        elif saverecord.Type == 'מנהל' or saverecord.Type == 'עובד מדינה':
+            messages.success(request,'הנותונים נשמרו בהצלחה ! נא לחכות אישור המנהל ')
+            return index(request)
+        else:
+           return registration(request)
     else:
         return registration(request)
 
@@ -187,7 +193,7 @@ def login(request):
         if useridtest==taz and passwordtest == password and type == 'אזרח':
              return index(request) 
     else :
-        messages.error(request,'הפרטים שהוזנו לא נמצאים במערכת')   
+        messages.error(request,' הפרטים שהוזנו לא נמצאים במערכת נא לחכות לאישור אם הפרטים נכונים')   
         return registration(request) 
 
 def CHANGE_PASSWORD(request):
@@ -195,25 +201,27 @@ def CHANGE_PASSWORD(request):
         useridtest=request.POST.get('taz')
         passwordcurrentpassword=request.POST.get('current_password')
         passwordtest=request.POST.get('password')
-        result = []
         cursor.execute("SELECT * FROM workers")
         data = cursor.fetchall()    
+        flag=0
         for item in data:
             ID,name,taz,password,type = item
-            if taz==useridtest and password == passwordcurrentpassword and (type == 'מנהל' or type == 'עובד מדינה'):
+            if  taz==useridtest and password == passwordcurrentpassword and (type == 'מנהל' or type == 'עובד מדינה'):
                 cursor.execute("UPDATE `workers` SET `password` = '%s' WHERE `workers`.`ID` = '%s';"%(passwordtest,ID))
                 db_connection.commit()
-                return registration(request)       
-        cursor.execute("SELECT * FROM registerform")
-        data = cursor.fetchall()    
-        for item in data:
-            ID,name,taz,password,type,civiliantype = item
-            if taz==useridtest and password == passwordcurrentpassword and type == 'אזרח':
-                cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
-                db_connection.commit()
-                return registration(request)
-                
-    else:
+                flag = 1
+        if flag == 1 :
+            return registration(request)
+        if flag == 0 :   
+            cursor.execute("SELECT * FROM registerform")
+            data = cursor.fetchall()    
+            for item in data:
+                ID,name,taz,password,type,civiliantype = item
+                if taz==useridtest and password == passwordcurrentpassword and type == 'אזרח':
+                    cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
+                    db_connection.commit()
+                    return registration(request)  
+                              
         messages.error(request,'! הפרטים שהוזנו לא נמצאים במערכת')   
         return changepassword(request)
 
@@ -384,9 +392,18 @@ def addpatient(request):
             if saverecord.taz==userid :
                 cursor.execute("DELETE FROM `indexform` WHERE `indexform`.`ID` = '%s';"%(ID))
                 db_connection.commit()
+                messages.success(request,'הפרטים נכנסו בהצלחה ! ')
                 return WorkerDash(request)
         else:
-            return add_patient(request)
+            cursor.execute("SELECT * FROM formcivilian")
+            data = cursor.fetchall()    
+            for item in data:
+                ID,taz,age,place,date,religion = item
+                if saverecord.taz==taz :
+                    cursor.execute("DELETE FROM `formcivilian` WHERE `formcivilian`.`ID` = '%s';"%(ID))
+                    db_connection.commit()
+                    messages.success(request,'הפרטים לא נמצאים במערכת !')
+                    return add_patient(request)
 
 
 def symptomesformcheck(request):
@@ -490,6 +507,7 @@ def shift_offer(request):
         saverecord.workerid=request.POST.get('workerid')
         saverecord.confirmation='ממתין לאישור'
         saverecord.save()
+        messages.success(request,'הפרטים נכנסו בהצלחה  ! ')
         return WorkerDash(request)
     else:
         return index(request)

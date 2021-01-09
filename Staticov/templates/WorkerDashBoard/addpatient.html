@@ -1,4 +1,8 @@
 {% load static %}
+{% if messages %}
+{% for message in messages %}<script>alert("{% for message in messages %}{{ message }}\n{% endfor %}");</script>
+{% endfor %}
+{% endif %}
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
@@ -44,11 +48,6 @@
 </div>
   <div class="input-block">
   <input type="submit" value="שליחה"/>
-  {% if messages %}
-  {% for message in messages%}
-    <h2 style="color:green;">{{message}}</h2>
-  {% endfor %}
-  {% endif %}
   </div>
   <figure aria-hidden="true">
     <div class="person-body"></div>

@@ -1,5 +1,9 @@
 {% load static %}  
 <head>
+	{% if messages %}
+	{% for message in messages %}<script>alert("{% for message in messages %}{{ message }}\n{% endfor %}");</script>
+	{% endfor %}
+	{% endif %}
 <meta charset="utf-8">
 <meta name="author" content="Softnio">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,11 +37,6 @@
           </div>
         </fieldset>
         <button type="submit" class="btn-login">כניסה</button>
-        {% if messages %}
-        {% for message in messages %}
-          <h2 style="color:green;">{{message}}</h2>
-        {% endfor %}
-        {% endif %}
       </form>
     </div>
     <div class="form-wrapper">
@@ -89,11 +88,6 @@
 		 
         </fieldset>
 		<button type="submit" class="btn-signup">המשך</button>
-        {% if messages %}
-        {% for message in messages%}
-          <h2 style="color:#5D93FF;">{{message}}</h2>
-        {% endfor %}
-        {% endif %}
       </form>
     </div>
   </div>

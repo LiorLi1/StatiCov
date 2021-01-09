@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="he">
 {% load static %}  
+{% if messages %}
+{% for message in messages %}<script>alert("{% for message in messages %}{{ message }}\n{% endfor %}");</script>
+{% endfor %}
+{% endif %}
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="">
@@ -108,7 +112,7 @@ body {
 }
 
 .form-container {
-  margin-top:80px;
+  margin-top:60px;
   height:calc(100% - 180px);
   padding:0px 40px;
   text-align:center;

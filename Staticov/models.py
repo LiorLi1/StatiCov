@@ -71,15 +71,6 @@ class RegisterFormModel(models.Model):
         managed = True
         db_table = 'registerform'
 
-class Patientworker(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    telephone = models.CharField(max_length=11)
-    taz = models.CharField(max_length=9)
-    workerid = models.IntegerField(db_column='workerid')
-
-    class Meta:
-        managed = True
-        db_table = 'patientworker'
 
 class SymptomesFormModel(models.Model):
     ID=models.IntegerField(db_column='ID',primary_key=True)

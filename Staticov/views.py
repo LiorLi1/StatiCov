@@ -211,6 +211,7 @@ def CHANGE_PASSWORD(request):
                 db_connection.commit()
                 flag = 1
         if flag == 1 :
+            messages.success(request,'סיסמא הוחלף בהצלחה')
             return registration(request)
         if flag == 0 :   
             cursor.execute("SELECT * FROM registerform")
@@ -220,8 +221,9 @@ def CHANGE_PASSWORD(request):
                 if taz==useridtest and password == passwordcurrentpassword and type == 'אזרח':
                     cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
                     db_connection.commit()
+                    messages.success(request,'סיסמא הוחלף בהצלחה')
                     return registration(request)  
-                              
+
         messages.error(request,'! הפרטים שהוזנו לא נמצאים במערכת')   
         return changepassword(request)
 
@@ -457,6 +459,7 @@ def CHANGE_MESSAGE_POPUP(request):
             MID,popupmsg = item
             cursor.execute("UPDATE `popup` SET `popupmsg` = '%s' WHERE `popup`.`MID` = '%s';"%(msgpp,1))
             db_connection.commit()
+            messages.success(request,'הודעה נקלת בהלחה')
         return AdminDash(request)
     else:  
         return AdminDash(request)

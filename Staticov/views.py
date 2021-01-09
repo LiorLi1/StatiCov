@@ -72,7 +72,7 @@ def registration_before_admin_approval(request):
             messages.success(request,'הנתונים נשמרו בהצלחה!')
             return index(request)
         elif saverecord.Type == 'מנהל' or saverecord.Type == 'עובד מדינה':
-            messages.success(request,'הנותונים נשמרו בהצלחה ! נא לחכות אישור המנהל ')
+            messages.success(request,'הנתונים נשמרו בהצלחה ! נא לחכות לאישור מנהל ')
             return index(request)
         else:
            return registration(request)
@@ -211,7 +211,7 @@ def CHANGE_PASSWORD(request):
                 db_connection.commit()
                 flag = 1
         if flag == 1 :
-            messages.success(request,'סיסמא הוחלף בהצלחה')
+            messages.success(request,'סיסמא הוחלפה בהצלחה')
             return registration(request)
         if flag == 0 :   
             cursor.execute("SELECT * FROM registerform")
@@ -221,7 +221,7 @@ def CHANGE_PASSWORD(request):
                 if taz==useridtest and password == passwordcurrentpassword and type == 'אזרח':
                     cursor.execute("UPDATE `registerform` SET `password` = '%s' WHERE `registerform`.`ID` = '%s';"%(passwordtest,ID))
                     db_connection.commit()
-                    messages.success(request,'סיסמא הוחלף בהצלחה')
+                    messages.success(request,'סיסמא הוחלפה בהצלחה')
                     return registration(request)  
 
         messages.error(request,'! הפרטים שהוזנו לא נמצאים במערכת')   
@@ -240,7 +240,7 @@ def Deleteworker(request):
             if taz==useridworker and name == workername :
                 cursor.execute("DELETE FROM `workers` WHERE `workers`.`ID` = '%s';"%(ID))
                 db_connection.commit()
-                messages.success(request,'עובד נמחק מהמערכת ')
+                messages.success(request,'עובד הוסר מהמערכת ')
                 return get_workers_table(request)
     else: messages.success(request,'עובד לא נמצא במערכת ')
     return index(request)
@@ -394,7 +394,7 @@ def addpatient(request):
             if saverecord.taz==userid :
                 cursor.execute("DELETE FROM `indexform` WHERE `indexform`.`ID` = '%s';"%(ID))
                 db_connection.commit()
-                messages.success(request,'הפרטים נכנסו בהצלחה ! ')
+                messages.success(request,'הפרטים נרשמו בהצלחה ! ')
                 return WorkerDash(request)
         else:
             cursor.execute("SELECT * FROM formcivilian")
@@ -421,7 +421,7 @@ def symptomesformcheck(request):
          messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
     elif headtest=='כן' and hottest=='כן' and smelltest =='כן' and hurtstest == 'לא':
-         messages.success(request,'מומלץ לבצע בדיקה חנגיף הקורונה')
+         messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
     elif headtest=='לא' and hottest=='כן' and smelltest =='כן' and hurtstest == 'כן':
          messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
@@ -433,7 +433,7 @@ def symptomesformcheck(request):
          messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
     elif headtest=='כן' and hottest=='כן' and smelltest =='לא' and hurtstest == 'לא':
-         messages.success(request,'מומלץ לבצע בדיקה חנגיף הקורונה')
+         messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
     elif headtest=='לא' and hottest=='כן' and smelltest =='כן' and hurtstest == 'לא':
          messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
@@ -442,7 +442,7 @@ def symptomesformcheck(request):
          messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
     else:
-         messages.success(request,'אין תסמינים חריגים לכן צורך לבצע בדיקה לנגיף הקורונה')
+         messages.success(request,'מידה ואין שום תסמינים אין צורך לבצע בדיקה לנגיף הקורונה')
          return index(request)
 
 
@@ -459,7 +459,7 @@ def CHANGE_MESSAGE_POPUP(request):
             MID,popupmsg = item
             cursor.execute("UPDATE `popup` SET `popupmsg` = '%s' WHERE `popup`.`MID` = '%s';"%(msgpp,1))
             db_connection.commit()
-            messages.success(request,'הודעה נקלת בהלחה')
+            messages.success(request,'הודעתך נקלטה בהצלחה')
         return AdminDash(request)
     else:  
         return AdminDash(request)
@@ -510,7 +510,7 @@ def shift_offer(request):
         saverecord.workerid=request.POST.get('workerid')
         saverecord.confirmation='ממתין לאישור'
         saverecord.save()
-        messages.success(request,'הפרטים נכנסו בהצלחה  ! ')
+        messages.success(request,'הפרטים נרשמו בהצלחה  ! ')
         return WorkerDash(request)
     else:
         return index(request)

@@ -398,10 +398,10 @@ def symptomesformcheck(request):
     if  headtest=='כן' and hottest=='כן' and smelltest =='כן' and hurtstest == 'כן':
          messages.success(request,'ממולץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
-    elif headtest=='לא' and hottest=='כן' and smelltest =='לא' and hurtstest == 'כן':
+    elif headtest=='כן' and hottest=='כן' and smelltest =='לא' and hurtstest == 'כן':
          messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
          return index(request)
-    elif headtest=='כן' and hottest=='כן' and smelltest =='לא' and hurtstest == 'לא':
+    elif headtest=='כן' and hottest=='כן' and smelltest =='כן' and hurtstest == 'לא':
          messages.success(request,'מומלץ לבצע בדיקה חנגיף הקורונה')
          return index(request)
     elif headtest=='לא' and hottest=='כן' and smelltest =='כן' and hurtstest == 'כן':
@@ -410,7 +410,20 @@ def symptomesformcheck(request):
     elif headtest=='לא' and hottest=='לא' and smelltest =='לא' and hurtstest == 'לא':
          messages.success(request,'במידה ואין שום תסמינים אין צורך לבצע בדיקה לנגיף הקורונה')
          return index(request)
+    elif headtest=='לא' and hottest=='כן' and smelltest =='כן' and hurtstest == 'כן':
+         messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
+         return index(request)
+    elif headtest=='כן' and hottest=='כן' and smelltest =='לא' and hurtstest == 'לא':
+         messages.success(request,'מומלץ לבצע בדיקה חנגיף הקורונה')
+         return index(request)
+    elif headtest=='לא' and hottest=='כן' and smelltest =='כן' and hurtstest == 'לא':
+         messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
+         return index(request)
+    elif headtest=='כן' and hottest=='לא' and smelltest =='לא' and hurtstest == 'כן':
+         messages.success(request,'מומלץ לבצע בדיקה לנגיף הקורונה')
+         return index(request)
     else:
+         messages.success(request,'אין תסמינים חריגים לכן צורך לבצע בדיקה לנגיף הקורונה')
          return index(request)
 
 

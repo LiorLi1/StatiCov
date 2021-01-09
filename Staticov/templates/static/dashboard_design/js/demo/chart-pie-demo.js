@@ -37,7 +37,7 @@ function handleData_2(data){
       labels : ["חרדי", "חילוני", "ערבי", "נוצרי", "מסורתי", "ללא דת"],
       datasets: [{
         label : labels,
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#c45850"],
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#808000","#c45850"],
         data: [countReligion["HI"],countReligion["HAR"],countReligion["MASOR"],countReligion["ARA"],countReligion["NOTS"],countReligion["BLI"]],
       }]
     },

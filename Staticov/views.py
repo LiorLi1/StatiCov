@@ -406,6 +406,8 @@ def addpatient(request):
                     db_connection.commit()
                     messages.success(request,'הפרטים לא נמצאים במערכת !')
                     return add_patient(request)
+    messages.success(request,'הפרטים לא נמצאים במערכת !')
+    return WorkerDash(request)
 
 
 def symptomesformcheck(request):

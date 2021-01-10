@@ -137,6 +137,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/Users/shira/Documents/GitHub/STATICOV/StatiCov/Staticov/templates/static',
     '/Users/kevyn/GitHub/STATICOV/StatiCov/Staticov/templates/static',
+    '/Users/liorl/Documents/GitHub/New folder (2)/StatiCov/Staticov/templates/static',
+    '/Users/liron/Documents/GitHub/StatiCov/StatiCov/Staticov/templates/static',
 ]
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
